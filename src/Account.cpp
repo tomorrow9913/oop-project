@@ -43,9 +43,9 @@ Account::Account(const Account& ref)
 
 /****************************************************************
 * Function Name: GetAccID
-* Description: 계좌번호 출력.
+* Description: 계좌번호를 반환.
 * @param: void
-* @return: accID
+* @return: accID(int)
 * etc: const function
 *
 * Author: -
@@ -78,7 +78,7 @@ void Account::Deposit(int money)
 * Function Name: Withdraw
 * Description: 출금.
 * @param: int 출금액
-* @return: int 출금후 잔액
+* @return: int 출금액
 * etc: None
 *
 * Author: -
