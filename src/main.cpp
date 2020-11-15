@@ -24,7 +24,7 @@
 
 using namespace std;
 
-enum { MAKE = 1, DEPOSIT, WITHDRAW, INQUIRE, EXIT };
+enum SelectMenu{ MAKE = 1, DEPOSIT, WITHDRAW, INQUIRE, EXIT };
 
 /*
  * 컨트롤 클래스 AccountHandler 중심으로 변경된 main 함수
