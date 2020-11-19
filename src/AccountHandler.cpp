@@ -2,7 +2,7 @@
  * File Name: AccountHandler.cpp
  *
  * Description:
- * AccountHandler í´ë˜ìŠ¤ ì •ì˜ íŒŒì¼
+ * AccountHandler Å¬·¡½º Á¤ÀÇ ÆÄÀÏ
  **/
 
 #include <iostream>
@@ -12,7 +12,7 @@ using namespace std;
 
 /**
 * Function Name: ShowMenu
-* Description: ë©”ì¸ ë©”ë‰´ë¥¼ ì¶œë ¥í•œë‹¤.
+* Description: ¸ŞÀÎ ¸Ş´º¸¦ Ãâ·ÂÇÑ´Ù.
 * @param: void
 * @return: void
 *
@@ -21,16 +21,16 @@ using namespace std;
 void AccountHandler::ShowMenu(void) const
 {
 	cout << "-----Menu------" << endl;
-	cout << "1. ê³„ì¢Œê°œì„¤" << endl;
-	cout << "2. ì…    ê¸ˆ" << endl;
-	cout << "3. ì¶œ    ê¸ˆ" << endl;
-	cout << "4. ê³„ì¢Œì •ë³´ ì „ì²´ ì¶œë ¥" << endl;
-	cout << "5. í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
+	cout << "1. °èÁÂ°³¼³" << endl;
+	cout << "2. ÀÔ    ±İ" << endl;
+	cout << "3. Ãâ    ±İ" << endl;
+	cout << "4. °èÁÂÁ¤º¸ ÀüÃ¼ Ãâ·Â" << endl;
+	cout << "5. ÇÁ·Î±×·¥ Á¾·á" << endl;
 }
 
 /**
 * Function Name: MakeAccount
-* Description: ê³„ì¢Œ ê°œì„¤.
+* Description: °èÁÂ °³¼³.
 * @param: void
 * @return: void
 *
@@ -42,10 +42,10 @@ void AccountHandler::MakeAccount(void)
 	char name[NAME_LEN];
 	int balance;
 
-	cout << "[ê³„ì¢Œê°œì„¤]" << endl;
-	cout << "ê³„ì¢ŒID: ";	cin >> id;
-	cout << "ì´  ë¦„: ";	cin >> name;
-	cout << "ì…ê¸ˆì•¡: ";	cin >> balance;
+	cout << "[°èÁÂ°³¼³]" << endl;
+	cout << "°èÁÂID: ";	cin >> id;
+	cout << "ÀÌ  ¸§: ";	cin >> name;
+	cout << "ÀÔ±İ¾×: ";	cin >> balance;
 	cout << endl;
 
 	accArr[accNum++] = new Account(id, balance, name);
@@ -53,7 +53,7 @@ void AccountHandler::MakeAccount(void)
 
 /**
 * Function Name: DepositMoney
-* Description: ì…ê¸ˆ.
+* Description: ÀÔ±İ.
 * @param: void
 * @return: void
 *
@@ -63,25 +63,25 @@ void AccountHandler::DepositMoney(void)
 {
 	int money;
 	int id;
-	cout << "[ì…    ê¸ˆ]" << endl;
-	cout << "ê³„ì¢ŒID: ";	cin >> id;
-	cout << "ì…ê¸ˆì•¡: ";	cin >> money;
+	cout << "[ÀÔ    ±İ]" << endl;
+	cout << "°èÁÂID: ";	cin >> id;
+	cout << "ÀÔ±İ¾×: ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
 			accArr[i]->Deposit(money);
-			cout << "ì…ê¸ˆì™„ë£Œ" << endl << endl;
+			cout << "ÀÔ±İ¿Ï·á" << endl << endl;
 			return;
 		}
 	}
-	cout << "ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤." << endl << endl;
+	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
 }
 
 /**
 * Function Name: WithdrawMoney
-* Description: ì¶œê¸ˆ.
+* Description: Ãâ±İ.
 * @param: void
 * @return: void
 *
@@ -91,9 +91,9 @@ void AccountHandler::WithdrawMoney(void)
 {
 	int money;
 	int id;
-	cout << "[ì¶œ    ê¸ˆ]" << endl;
-	cout << "ê³„ì¢ŒID: ";	cin >> id;
-	cout << "ì¶œê¸ˆì•¡: ";	cin >> money;
+	cout << "[Ãâ    ±İ]" << endl;
+	cout << "°èÁÂID: ";	cin >> id;
+	cout << "Ãâ±İ¾×: ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
@@ -101,20 +101,20 @@ void AccountHandler::WithdrawMoney(void)
 		{
 			if (accArr[i]->Withdraw(money) == 0)
 			{
-				cout << "ì”ì•¡ë¶€ì¡±" << endl << endl;
+				cout << "ÀÜ¾×ºÎÁ·" << endl << endl;
 				return;
 			}
 
-			cout << "ì¶œê¸ˆì™„ë£Œ" << endl << endl;
+			cout << "Ãâ±İ¿Ï·á" << endl << endl;
 			return;
 		}
 	}
-	cout << "ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤." << endl << endl;
+	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
 }
 
 /**
 * Function Name: ShowAllAccInfo
-* Description: ì „ì²´ ê³„ì¢Œ ì¶œë ¥.
+* Description: ÀüÃ¼ °èÁÂ Ãâ·Â.
 * @param: void
 * @return: void
 *

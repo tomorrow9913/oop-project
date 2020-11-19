@@ -2,7 +2,7 @@
  * File Name: AccountHandler.h
  *
  * Description:
- * ì»¨íŠ¸ë¡¤(Control) í´ë˜ìŠ¤
+ * ÄÁÆ®·Ñ(Control) Å¬·¡½º
  **/
 #pragma once
 #include "Account.h"
@@ -12,8 +12,8 @@ const int NAME_LEN = 20;
 class AccountHandler
 {
 private:
-	Account* accArr[100];       // ê³„ì¢Œ ë°°ì—´
-	int accNum;                 // ê³„ì¢Œì˜ ê°œìˆ˜
+	Account* accArr[100];       // °èÁÂ ¹è¿­
+	int accNum;                 // °èÁÂÀÇ °³¼ö
 
 public:
 	AccountHandler();

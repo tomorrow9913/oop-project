@@ -2,7 +2,7 @@
  * File Name: Account.cpp
  *
  * Description:
- * Account ê°ì²´ë¥¼ êµ¬ì„±í•˜ê¸° ìœ„í•œ ë©¤ë²„ í•¨ìˆ˜ ì •ì˜ íŒŒì¼
+ * Account °´Ã¼¸¦ ±¸¼ºÇÏ±â À§ÇÑ ¸â¹ö ÇÔ¼ö Á¤ÀÇ ÆÄÀÏ
  **/
 
 #include <iostream>
@@ -27,7 +27,7 @@ Account::Account(const Account& ref)
 
 /**
 * Function Name: GetAccID
-* Description: ê³„ì¢Œë²ˆí˜¸ë¥¼ ë°˜í™˜.
+* Description: °èÁÂ¹øÈ£¸¦ ¹İÈ¯.
 * @param: void
 * @return: accID(int)
 *
@@ -37,7 +37,7 @@ int Account::GetAccID() const { return accID; }
 
 /**
 * Function Name: Deposit
-* Description: ì…ê¸ˆ.
+* Description: ÀÔ±İ.
 * @param: int
 * @return: void
 *
@@ -50,9 +50,9 @@ void Account::Deposit(int money)
 
 /**
 * Function Name: Withdraw
-* Description: ì¶œê¸ˆ.
-* @param: int ì¶œê¸ˆì•¡
-* @return: int ì¶œê¸ˆì•¡
+* Description: Ãâ±İ.
+* @param: int Ãâ±İ¾×
+* @return: int Ãâ±İ¾×
 *
 * Author: -
 **/
@@ -67,7 +67,7 @@ int Account::Withdraw(int money)
 
 /**
 * Function Name: ShowAccInfo
-* Description: ê³„ì¢Œ ì •ë³´ ì¶œë ¥.
+* Description: °èÁÂ Á¤º¸ Ãâ·Â.
 * @param: void
 * @return: void
 *
@@ -75,9 +75,9 @@ int Account::Withdraw(int money)
 **/
 void Account::ShowAccInfo() const
 {
-	cout << "ê³„ì¢ŒID: " << accID << endl;
-	cout << "ì´  ë¦„: " << cusName << endl;
-	cout << "ì”  ì•¡: " << balance << endl;
+	cout << "°èÁÂID: " << accID << endl;
+	cout << "ÀÌ  ¸§: " << cusName << endl;
+	cout << "ÀÜ  ¾×: " << balance << endl;
 }
 
 Account::~Account()

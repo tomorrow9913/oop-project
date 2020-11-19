@@ -2,7 +2,7 @@
  * File Name: Account.h
  *
  * Description:
- * ê³„ì • ì •ë³´ë¥¼ ì €ìž¥í•˜ê¸° ìœ„í•œ í´ëž˜ìŠ¤ ì •ì˜
+ * °èÁ¤ Á¤º¸¸¦ ÀúÀåÇÏ±â À§ÇÑ Å¬·¡½º Á¤ÀÇ
  **/
 #pragma once
 
