@@ -25,7 +25,7 @@ Account::Account(const Account& ref)
 	strcpy_s(cusName, (strlen(ref.cusName) + 1), ref.cusName);
 }
 
-/****************************************************************
+/**
 * Function Name: GetAccID
 * Description: 계좌번호를 반환.
 * @param: void
