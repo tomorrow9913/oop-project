@@ -1,25 +1,9 @@
-/****************************************************************
+/** 
  * File Name: Account.cpp
  *
  * Description:
- * Account °´Ã¼¸¦ ±¸¼ºÇÏ±â À§ÇÑ ¸â¹ö ÇÔ¼ö Á¤ÀÇ ÆÄÀÏ
- *
- * Extern File
- * Name         Description
- * ============ ================================================
- * iostream     ±âº»ÀûÀÎ ÀÔÃâ·ÂÀ» À§ÇÔ
- * cstring      ¹®ÀÚ¿­ Ã³¸®¸¦ À§ÇÔ
- * Account.h    Å¬·¡½º Á¤ÀÇ ºÒ·¯¿È
- * 
- * Extern Variables
- * Name         Type        Description
- * ============ =========== ====================================
- *
- * Global Variables
- * Name         Type        Description
- * ============ =========== ====================================
- * None
- ****************************************************************/
+ * Account ê°ì²´ë¥¼ êµ¬ì„±í•˜ê¸° ìœ„í•œ ë©¤ë²„ í•¨ìˆ˜ ì •ì˜ íŒŒì¼
+ **/
 
 #include <iostream>
 #include <cstring>
@@ -43,50 +27,35 @@ Account::Account(const Account& ref)
 
 /****************************************************************
 * Function Name: GetAccID
-* Description: °èÁÂ¹øÈ£¸¦ ¹İÈ¯.
+* Description: ê³„ì¢Œë²ˆí˜¸ë¥¼ ë°˜í™˜.
 * @param: void
 * @return: accID(int)
-* etc: const function
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 int Account::GetAccID() const { return accID; }
 
-/****************************************************************
+/**
 * Function Name: Deposit
-* Description: ÀÔ±İ.
+* Description: ì…ê¸ˆ.
 * @param: int
 * @return: void
-* etc: None
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 void Account::Deposit(int money)
 {
 	balance += money;
 }
 
-/****************************************************************
+/**
 * Function Name: Withdraw
-* Description: Ãâ±İ.
-* @param: int Ãâ±İ¾×
-* @return: int Ãâ±İ¾×
-* etc: None
+* Description: ì¶œê¸ˆ.
+* @param: int ì¶œê¸ˆì•¡
+* @return: int ì¶œê¸ˆì•¡
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 int Account::Withdraw(int money)
 {
 	if (balance < money)
@@ -96,24 +65,19 @@ int Account::Withdraw(int money)
 	return money;
 }
 
-/****************************************************************
+/**
 * Function Name: ShowAccInfo
-* Description: °èÁÂ Á¤º¸ Ãâ·Â.
+* Description: ê³„ì¢Œ ì •ë³´ ì¶œë ¥.
 * @param: void
 * @return: void
-* etc: const Function
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 void Account::ShowAccInfo() const
 {
-	cout << "°èÁÂID: " << accID << endl;
-	cout << "ÀÌ  ¸§: " << cusName << endl;
-	cout << "ÀÜ  ¾×: " << balance << endl;
+	cout << "ê³„ì¢ŒID: " << accID << endl;
+	cout << "ì´  ë¦„: " << cusName << endl;
+	cout << "ì”  ì•¡: " << balance << endl;
 }
 
 Account::~Account()

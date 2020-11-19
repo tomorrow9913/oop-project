@@ -1,136 +1,99 @@
-/****************************************************************
+/**
  * File Name: AccountHandler.cpp
  *
  * Description:
- * AccountHandler Å¬·¡½º Á¤ÀÇ ÆÄÀÏ
- *
- * Extern File
- * Name         Description
- * ============ ================================================
- * iostream     ±âº»ÀûÀÎ ÀÔÃâ·ÂÀ» À§ÇÔ
- * cstring      ¹®ÀÚ¿­ Ã³¸®¸¦ À§ÇÔ
- * Account.h    Å¬·¡½º Á¤ÀÇ ºÒ·¯¿È
- *
- * Extern Variables
- * Name         Type        Description
- * ============ =========== ====================================
- * NAME_LEN     const int   ÀÌ¸§ÀÇ ÃÖ´ë ±æÀÌ
- *
- * Global Variables
- * Name         Type        Description
- * ============ =========== ====================================
- * None
- ****************************************************************/
+ * AccountHandler í´ë˜ìŠ¤ ì •ì˜ íŒŒì¼
+ **/
 
 #include <iostream>
 #include "AccountHandler.h"
 
 using namespace std;
 
-/****************************************************************
+/**
 * Function Name: ShowMenu
-* Description: ¸ŞÀÎ ¸Ş´º¸¦ Ãâ·ÂÇÑ´Ù.
+* Description: ë©”ì¸ ë©”ë‰´ë¥¼ ì¶œë ¥í•œë‹¤.
 * @param: void
 * @return: void
-* etc: const function
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm: 
-***************************************************************/
+**/
 void AccountHandler::ShowMenu(void) const
 {
 	cout << "-----Menu------" << endl;
-	cout << "1. °èÁÂ°³¼³" << endl;
-	cout << "2. ÀÔ    ±İ" << endl;
-	cout << "3. Ãâ    ±İ" << endl;
-	cout << "4. °èÁÂÁ¤º¸ ÀüÃ¼ Ãâ·Â" << endl;
-	cout << "5. ÇÁ·Î±×·¥ Á¾·á" << endl;
+	cout << "1. ê³„ì¢Œê°œì„¤" << endl;
+	cout << "2. ì…    ê¸ˆ" << endl;
+	cout << "3. ì¶œ    ê¸ˆ" << endl;
+	cout << "4. ê³„ì¢Œì •ë³´ ì „ì²´ ì¶œë ¥" << endl;
+	cout << "5. í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
 }
 
-/****************************************************************
+/**
 * Function Name: MakeAccount
-* Description: °èÁÂ °³¼³.
+* Description: ê³„ì¢Œ ê°œì„¤.
 * @param: void
 * @return: void
-* etc: None
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 void AccountHandler::MakeAccount(void)
 {
 	int id;
 	char name[NAME_LEN];
 	int balance;
 
-	cout << "[°èÁÂ°³¼³]" << endl;
-	cout << "°èÁÂID: ";	cin >> id;
-	cout << "ÀÌ  ¸§: ";	cin >> name;
-	cout << "ÀÔ±İ¾×: ";	cin >> balance;
+	cout << "[ê³„ì¢Œê°œì„¤]" << endl;
+	cout << "ê³„ì¢ŒID: ";	cin >> id;
+	cout << "ì´  ë¦„: ";	cin >> name;
+	cout << "ì…ê¸ˆì•¡: ";	cin >> balance;
 	cout << endl;
 
 	accArr[accNum++] = new Account(id, balance, name);
 }
 
-/****************************************************************
+/**
 * Function Name: DepositMoney
-* Description: ÀÔ±İ.
+* Description: ì…ê¸ˆ.
 * @param: void
 * @return: void
-* etc: None
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 void AccountHandler::DepositMoney(void)
 {
 	int money;
 	int id;
-	cout << "[ÀÔ    ±İ]" << endl;
-	cout << "°èÁÂID: ";	cin >> id;
-	cout << "ÀÔ±İ¾×: ";	cin >> money;
+	cout << "[ì…    ê¸ˆ]" << endl;
+	cout << "ê³„ì¢ŒID: ";	cin >> id;
+	cout << "ì…ê¸ˆì•¡: ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
 			accArr[i]->Deposit(money);
-			cout << "ÀÔ±İ¿Ï·á" << endl << endl;
+			cout << "ì…ê¸ˆì™„ë£Œ" << endl << endl;
 			return;
 		}
 	}
-	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
+	cout << "ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤." << endl << endl;
 }
 
-/****************************************************************
+/**
 * Function Name: WithdrawMoney
-* Description: Ãâ±İ.
+* Description: ì¶œê¸ˆ.
 * @param: void
 * @return: void
-* etc: None
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 void AccountHandler::WithdrawMoney(void)
 {
 	int money;
 	int id;
-	cout << "[Ãâ    ±İ]" << endl;
-	cout << "°èÁÂID: ";	cin >> id;
-	cout << "Ãâ±İ¾×: ";	cin >> money;
+	cout << "[ì¶œ    ê¸ˆ]" << endl;
+	cout << "ê³„ì¢ŒID: ";	cin >> id;
+	cout << "ì¶œê¸ˆì•¡: ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
@@ -138,30 +101,25 @@ void AccountHandler::WithdrawMoney(void)
 		{
 			if (accArr[i]->Withdraw(money) == 0)
 			{
-				cout << "ÀÜ¾×ºÎÁ·" << endl << endl;
+				cout << "ì”ì•¡ë¶€ì¡±" << endl << endl;
 				return;
 			}
 
-			cout << "Ãâ±İ¿Ï·á" << endl << endl;
+			cout << "ì¶œê¸ˆì™„ë£Œ" << endl << endl;
 			return;
 		}
 	}
-	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
+	cout << "ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤." << endl << endl;
 }
 
-/****************************************************************
+/**
 * Function Name: ShowAllAccInfo
-* Description: ÀüÃ¼ °èÁÂ Ãâ·Â.
+* Description: ì „ì²´ ê³„ì¢Œ ì¶œë ¥.
 * @param: void
 * @return: void
-* etc: None
 *
 * Author: -
-* Creat Date: -
-* Last Edit: -
-*
-* Algorithm:
-***************************************************************/
+**/
 void AccountHandler::ShowAllAccInfo(void) const
 {
 	for (int i = 0; i < accNum; i++)

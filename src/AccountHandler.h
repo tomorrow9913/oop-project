@@ -1,19 +1,9 @@
-/****************************************************************
+/**
  * File Name: AccountHandler.h
  *
  * Description:
- * ÄÁÆ®·Ñ(Control) Å¬·¡½º
- *
- * Extern File
- * Name         Description
- * ============ ================================================
- * Account.h    °èÁÂ Á¤º¸ Å¬·¡½º
- *
- * Global Variables
- * Name         Type        Description
- * ============ =========== =====================================
- * NAME_LEN     const int   ÀÌ¸§ÀÇ ÃÖ´ë ±æÀÌ
- ****************************************************************/
+ * ì»¨íŠ¸ë¡¤(Control) í´ë˜ìŠ¤
+ **/
 #pragma once
 #include "Account.h"
 
@@ -22,8 +12,8 @@ const int NAME_LEN = 20;
 class AccountHandler
 {
 private:
-	Account* accArr[100];       // °èÁÂ ¹è¿­
-	int accNum;                 // °èÁÂÀÇ °³¼ö
+	Account* accArr[100];       // ê³„ì¢Œ ë°°ì—´
+	int accNum;                 // ê³„ì¢Œì˜ ê°œìˆ˜
 
 public:
 	AccountHandler();

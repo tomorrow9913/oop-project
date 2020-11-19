@@ -1,23 +1,8 @@
-/****************************************************************
+/**
  * File Name:  main.cpp
  *
- * Description: ÀºÇà ½Ã¹Ä·¹ÀÌ¼Ç ¸ŞÀÎ ÇÁ·Î±×·¥
- *
- * Extern File
- * Name         Description
- * ============ ================================================
- * Account.h	°èÁÂ °ü·Ã Å¬·¡½º Á¤ÀÇ
- *
- * Extern Variables
- * Name         Type        Description
- * ============ =========== ====================================
- *
- * Global Variables
- * Name         Type        Description
- * ============ =========== ====================================
- * NAME_LEN		const int	ÀÌ¸§ÀÇ ±æÀÌ¸¦ ¼³Á¤ÇÔ
- *				enum		¸Ş´º ¹øÈ£ °áÁ¤
- ****************************************************************/
+ * Description: ì€í–‰ ì‹œë®¬ë ˆì´ì…˜ ë©”ì¸ í”„ë¡œê·¸ë¨
+ **/
 #include <iostream>
 #include "Account.h"
 #include "AccountHandler.h"
@@ -27,7 +12,7 @@ using namespace std;
 enum SelectMenu{ MAKE = 1, DEPOSIT, WITHDRAW, INQUIRE, EXIT };
 
 /*
- * ÄÁÆ®·Ñ Å¬·¡½º AccountHandler Áß½ÉÀ¸·Î º¯°æµÈ main ÇÔ¼ö
+ * ì»¨íŠ¸ë¡¤ í´ë˜ìŠ¤ AccountHandler ì¤‘ì‹¬ìœ¼ë¡œ ë³€ê²½ëœ main í•¨ìˆ˜
  */
 
 int main(void)
@@ -38,7 +23,7 @@ int main(void)
 	while (1)
 	{
 		manager.ShowMenu();
-		cout << "¼±ÅÃ: ";
+		cout << "ì„ íƒ: ";
 		cin >> choice;
 		cout << endl;
 
