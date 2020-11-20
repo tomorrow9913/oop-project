@@ -13,10 +13,15 @@ using namespace std;
 
 
 Account::Account() {
-
+	this->accID = 0;
+	this->balance = 0;
+	this->cusName = 0;
+	this->interestRate = 0;
 }
 
-Account::Account(int ID, int money, char* name) : accID(ID), balance(money)
+
+Account::Account(int ID, int money, char* name) 
+	: accID(ID), balance(money)
 {
 	cusName = new char[strlen(name) + 1];
 	strcpy_s(cusName, (strlen(name) + 1), name);
@@ -89,7 +94,13 @@ Account::~Account()
 	delete[]cusName;
 }
 
-NormalAccount::NormalAccount() {};
+NormalAccount::NormalAccount() {
+	this->accID = 0;
+	this->balance = 0;
+	this->cusName = 0;
+	this->grade = 0;
+};
+
 NormalAccount::NormalAccount(int ID, int money, char* name, int grade) {
 	this->accID = ID;
 	this->balance = money;
@@ -97,6 +108,20 @@ NormalAccount::NormalAccount(int ID, int money, char* name, int grade) {
 	this->grade = grade;
 }
 
+NormalAccount::NormalAccount(const NormalAccount& ref)
+	: Account(ref), grade(ref.grade)
+{
+
+}
+
+/**
+* Function Name: SetGrade / GetGrade
+* Description: 계좌등급 설정 및 반환
+* @param: int / void
+* @return: void / int
+*
+* Author: -황진주
+**/
 void NormalAccount::SetGrade(int grade) {
 	this->grade = grade;
 }
@@ -105,6 +130,10 @@ int NormalAccount::GetGrade() {
 }
 
 HighCreditAccount::HighCreditAccount() {
+	this->accID = 0;
+	this->balance = 0;
+	this->cusName = 0;
+	this->grade = 0;
 	transferFee[0] = 1.0;
 	transferFee[1] = 1.2;
 	transferFee[2] = 1.5;
@@ -118,16 +147,40 @@ HighCreditAccount::HighCreditAccount(int ID, int money, char* name, int grade) {
 	transferFee[1] = 1.2;
 	transferFee[2] = 1.5;
 }
+HighCreditAccount::HighCreditAccount(const HighCreditAccount& ref)
+	: Account(ref), grade(ref.grade)
+{
+	for (int i = 0; i < sizeof(transferFee) / sizeof(double); i++) {
+		this->transferFee[i] = ref.transferFee[i];
+	}
+}
 
+/**
+* Function Name: SetGrade / GetGrade
+* Description: 계좌등급 설정 및 반환
+* @param: int / void
+* @return: void / int
+*
+* Author: -황진주
+**/
 void HighCreditAccount::SetGrade(int grade) {
 	this->grade = grade;
 }
 int HighCreditAccount::GetGrade() {
 	return this->grade;
 }
+
+/**
+* Function Name: SetTransferFee / GetTransferFee
+* Description: 이체 수수료 설정 / 반환
+* @param: int, double / int
+* @return: void / double
+*
+* Author: -황진주
+**/
 void HighCreditAccount::SetTransferFee(int grade, double transferFee) {
 	this->transferFee[grade - 1] = transferFee;
 }
-int HighCreditAccount::GetTransferFee(int grade) {
+double HighCreditAccount::GetTransferFee(int grade) {
 	return this->transferFee[grade - 1];
 }

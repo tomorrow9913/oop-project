@@ -12,9 +12,10 @@ const int NAME_LEN = 20;
 class AccountHandler
 {
 private:
-	Account* accArr[100];       // 계좌 배열 - type1
-
-	int accNum;                 // 계좌의 개수
+	Account* accArr[100];
+	NormalAccount* normalAccArr[100];
+	HighCreditAccount* highCreditAccArr[100];
+	int accNum;
 
 public:
 	AccountHandler();
