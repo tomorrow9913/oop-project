@@ -9,7 +9,6 @@
 #include "AccountHandler.h"
 
 using namespace std;
-
 /**
 * Function Name: ShowMenu
 * Description: 메인 메뉴를 출력한다.

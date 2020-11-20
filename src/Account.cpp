@@ -11,8 +11,12 @@
 
 using namespace std;
 
-Account::Account(int ID, int money, char* name)
-	: accID(ID), balance(money)
+
+Account::Account() {
+
+}
+
+Account::Account(int ID, int money, char* name) : accID(ID), balance(money)
 {
 	cusName = new char[strlen(name) + 1];
 	strcpy_s(cusName, (strlen(name) + 1), name);
@@ -83,4 +87,47 @@ void Account::ShowAccInfo() const
 Account::~Account()
 {
 	delete[]cusName;
+}
+
+NormalAccount::NormalAccount() {};
+NormalAccount::NormalAccount(int ID, int money, char* name, int grade) {
+	this->accID = ID;
+	this->balance = money;
+	this->cusName = name;
+	this->grade = grade;
+}
+
+void NormalAccount::SetGrade(int grade) {
+	this->grade = grade;
+}
+int NormalAccount::GetGrade() {
+	return this->grade;
+}
+
+HighCreditAccount::HighCreditAccount() {
+	transferFee[0] = 1.0;
+	transferFee[1] = 1.2;
+	transferFee[2] = 1.5;
+};
+HighCreditAccount::HighCreditAccount(int ID, int money, char* name, int grade) {
+	this->accID = ID;
+	this->balance = money;
+	this->cusName = name;
+	this->grade = grade;
+	transferFee[0] = 1.0;
+	transferFee[1] = 1.2;
+	transferFee[2] = 1.5;
+}
+
+void HighCreditAccount::SetGrade(int grade) {
+	this->grade = grade;
+}
+int HighCreditAccount::GetGrade() {
+	return this->grade;
+}
+void HighCreditAccount::SetTransferFee(int grade, double transferFee) {
+	this->transferFee[grade - 1] = transferFee;
+}
+int HighCreditAccount::GetTransferFee(int grade) {
+	return this->transferFee[grade - 1];
 }
