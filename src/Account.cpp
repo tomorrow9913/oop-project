@@ -11,14 +11,12 @@
 
 using namespace std;
 
-
 Account::Account() {
 	this->accID = 0;
 	this->balance = 0;
 	this->cusName = 0;
 	this->interestRate = 0;
 }
-
 
 Account::Account(int ID, int money, char* name) 
 	: accID(ID), balance(money)
@@ -59,19 +57,22 @@ void Account::Deposit(int money)
 
 /**
 * Function Name: Withdraw
-* Description: 출금.
+* Description: 출금
+*	출금 성공시 잔액 반환
+*	실패시 오류 코드(음수) 반환
+*	ERR_LACK(-1) : 잔액 부족
 * @param: int 출금액
-* @return: int 출금액
+* @return: int 잔액
 *
-* Author: -
+* Author: Jeong MinGyu
 **/
 int Account::Withdraw(int money)
 {
 	if (balance < money)
-		return 0;
+		return ERR_LACK;
 
 	balance -= money;
-	return money;
+	return balance;
 }
 
 /**
@@ -113,13 +114,13 @@ NormalAccount::NormalAccount(const NormalAccount& ref)
 
 }
 
-
 HighCreditAccount::HighCreditAccount() {
 	this->accID = 0;
 	this->balance = 0;
 	this->cusName = 0;
 	this->grade = 0;
 };
+
 HighCreditAccount::HighCreditAccount(int ID, int money, char* name, int grade, double addInterestRate) {
 	this->accID = ID;
 	this->balance = money;
@@ -141,4 +142,41 @@ void HighCreditAccount::SetGrade(int grade) {
 }
 int HighCreditAccount::GetGrade() {
 	return this->grade;
+}
+
+/**
+* Function Name: Deposit
+* Description: 입금
+* @param: int money
+* @return: void
+*
+* Author: 박주용 외 3인
+**/
+void NormalAccount::Deposit(int money){
+	int interest = (int)money * interestRate;
+
+	balance += interest + money;
+}
+
+/**
+* Function Name: Deposit
+* Description: 입금
+*	등급 설정 및 이율 설정 포함
+* @param: int money
+* @return: void
+*
+* Author: 박주용 외 3인
+**/
+void HighCreditAccount::Deposit(int money){
+	//TODO 등급 설정 이후 함수 분리
+	//돈이 들어올때마다 등급 측정, 이율
+	if (balance >= SET_C && balance < SET_B) { SetGrade(GRADE_C); addInterestRate = C_RATE; }
+	else if(balance >= SET_B && balance < SET_A){SetGrade(GRADE_B);addInterestRate = B_RATE; }
+	else if(balance >= SET_A){SetGrade(GRADE_A);addInterestRate = A_RATE; }
+	
+	//A,B.C 따라서 다른 이자 
+	int interest = (int)(money * interestRate);	// 기본 이자
+	interest += (int)(money * addInterestRate); //기본 이자+ 등급별 이자
+	
+	balance += interest + money;
 }

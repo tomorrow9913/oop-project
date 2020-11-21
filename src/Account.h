@@ -6,6 +6,13 @@
  **/
 #pragma once
 
+#define C_RATE 0.03
+#define B_RATE 0.05
+#define A_RATE 0.07
+
+enum Grade { GRADE_A = 1, GRADE_B, GRADE_C, GRADE_D };
+enum GradeSetMoney { SET_A = 1000000000, SET_B = 100000000, SET_C = 10000000 };
+
 class Account
 {
 protected:
@@ -18,7 +25,7 @@ public:
 	Account(const Account& ref);
 	Account(int ID, int money, char* name);
 	int GetAccID() const;
-	void Deposit(int money);
+	virtual void Deposit(int money); 
 	int Withdraw(int money);
 	void ShowAccInfo() const;
 	~Account();
@@ -32,6 +39,7 @@ public:
 	NormalAccount();
 	NormalAccount(const NormalAccount& ref);
 	NormalAccount(int ID, int money, char* name, int grade, double addInterestRate);
+	void Deposit(int money);
 	void SetGrade(int grade);
 	int GetGrade();
 };
@@ -45,6 +53,9 @@ public:
 	HighCreditAccount();
 	HighCreditAccount(const HighCreditAccount& ref);
 	HighCreditAccount(int ID, int money, char* name, int grade, double addInterestRate);
+	void Deposit(int money);
 	void SetGrade(int grade);
 	int GetGrade();
 };
+
+#define ERR_LACK -1

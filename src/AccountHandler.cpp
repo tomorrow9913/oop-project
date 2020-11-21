@@ -98,7 +98,7 @@ void AccountHandler::WithdrawMoney(void)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
-			if (accArr[i]->Withdraw(money) == 0)
+			if (accArr[i]->Withdraw(money) < 0)
 			{
 				cout << "ÀÜ¾×ºÎÁ·" << endl << endl;
 				return;
