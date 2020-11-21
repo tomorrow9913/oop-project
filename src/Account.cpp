@@ -153,7 +153,7 @@ int HighCreditAccount::GetGrade() {
 * Author: 박주용 외 3인
 **/
 void NormalAccount::Deposit(int money){
-	int interest = (int)money * interestRate;
+	int interest = (int)(money * interestRate);
 
 	balance += interest + money;
 }
