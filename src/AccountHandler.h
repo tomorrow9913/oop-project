@@ -13,8 +13,6 @@ class AccountHandler
 {
 private:
 	Account* accArr[100];
-	NormalAccount* normalAccArr[100];
-	HighCreditAccount* highCreditAccArr[100];
 	int accNum;
 
 public:

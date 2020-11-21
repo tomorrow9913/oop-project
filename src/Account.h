@@ -27,11 +27,11 @@ public:
 // 통장 유형2 :  추가 이자 있는 거 (high) - A등급 (기본 이자 + A 이자), B등급 (기본 이자 + B 이자), C등급 (기본 이자 + C이자)
 class NormalAccount : Account {
 private:
-	int grade;
+	double addInterestRate;
 public:
 	NormalAccount();
 	NormalAccount(const NormalAccount& ref);
-	NormalAccount(int ID, int money, char* name, int grade);
+	NormalAccount(int ID, int money, char* name, int grade, double addInterestRate);
 	void SetGrade(int grade);
 	int GetGrade();
 };
@@ -40,13 +40,11 @@ public:
 class HighCreditAccount : Account {
 private:
 	int grade;
-	double transferFee[3];
+	double addInterestRate;
 public:
 	HighCreditAccount();
 	HighCreditAccount(const HighCreditAccount& ref);
-	HighCreditAccount(int ID, int money, char* name, int grade);
+	HighCreditAccount(int ID, int money, char* name, int grade, double addInterestRate);
 	void SetGrade(int grade);
 	int GetGrade();
-	void SetTransferFee(int grade, double transferFee);
-	double GetTransferFee(int grade);
 };

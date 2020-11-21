@@ -98,61 +98,34 @@ NormalAccount::NormalAccount() {
 	this->accID = 0;
 	this->balance = 0;
 	this->cusName = 0;
-	this->grade = 0;
 };
 
-NormalAccount::NormalAccount(int ID, int money, char* name, int grade) {
+NormalAccount::NormalAccount(int ID, int money, char* name, int grade, double addInterestRate) {
 	this->accID = ID;
 	this->balance = money;
 	this->cusName = name;
-	this->grade = grade;
+	this->addInterestRate = addInterestRate;
 }
 
 NormalAccount::NormalAccount(const NormalAccount& ref)
-	: Account(ref), grade(ref.grade)
+	: Account(ref)
 {
 
 }
 
-/**
-* Function Name: SetGrade / GetGrade
-* Description: 계좌등급 설정 및 반환
-* @param: int / void
-* @return: void / int
-*
-* Author: -황진주
-**/
-void NormalAccount::SetGrade(int grade) {
-	this->grade = grade;
-}
-int NormalAccount::GetGrade() {
-	return this->grade;
-}
 
 HighCreditAccount::HighCreditAccount() {
 	this->accID = 0;
 	this->balance = 0;
 	this->cusName = 0;
 	this->grade = 0;
-	transferFee[0] = 1.0;
-	transferFee[1] = 1.2;
-	transferFee[2] = 1.5;
 };
-HighCreditAccount::HighCreditAccount(int ID, int money, char* name, int grade) {
+HighCreditAccount::HighCreditAccount(int ID, int money, char* name, int grade, double addInterestRate) {
 	this->accID = ID;
 	this->balance = money;
 	this->cusName = name;
 	this->grade = grade;
-	transferFee[0] = 1.0;
-	transferFee[1] = 1.2;
-	transferFee[2] = 1.5;
-}
-HighCreditAccount::HighCreditAccount(const HighCreditAccount& ref)
-	: Account(ref), grade(ref.grade)
-{
-	for (int i = 0; i < sizeof(transferFee) / sizeof(double); i++) {
-		this->transferFee[i] = ref.transferFee[i];
-	}
+	this->addInterestRate = addInterestRate;
 }
 
 /**
@@ -168,19 +141,4 @@ void HighCreditAccount::SetGrade(int grade) {
 }
 int HighCreditAccount::GetGrade() {
 	return this->grade;
-}
-
-/**
-* Function Name: SetTransferFee / GetTransferFee
-* Description: 이체 수수료 설정 / 반환
-* @param: int, double / int
-* @return: void / double
-*
-* Author: -황진주
-**/
-void HighCreditAccount::SetTransferFee(int grade, double transferFee) {
-	this->transferFee[grade - 1] = transferFee;
-}
-double HighCreditAccount::GetTransferFee(int grade) {
-	return this->transferFee[grade - 1];
 }
