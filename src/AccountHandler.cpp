@@ -38,16 +38,25 @@ void AccountHandler::ShowMenu(void) const
 void AccountHandler::MakeAccount(void)
 {
 	int id;
+	int type;
 	char name[NAME_LEN];
 	int balance;
 
 	cout << "[계좌개설]" << endl;
+	cout << "\t1. 입출금계좌(NormalAccount)" << endl;
+	cout << "\t2. 신용계좌(HighCreditAccount)" << endl;
+	cout << "계좌 항목 선택 : "; cin >> type; cout << endl;
 	cout << "계좌ID: ";	cin >> id;
 	cout << "이  름: ";	cin >> name;
 	cout << "입금액: ";	cin >> balance;
 	cout << endl;
 
-	accArr[accNum++] = new Account(id, balance, name);
+	if (type == 1) {
+		accArr[accNum++] = new NormalAccount(id, balance, name);
+	}
+	else if (type == 2) {
+		accArr[accNum++] = new HighCreditAccount(id, balance, name);
+	}
 }
 
 /**
@@ -90,6 +99,7 @@ void AccountHandler::WithdrawMoney(void)
 {
 	int money;
 	int id;
+
 	cout << "[출    금]" << endl;
 	cout << "계좌ID: ";	cin >> id;
 	cout << "출금액: ";	cin >> money;

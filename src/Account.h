@@ -6,12 +6,8 @@
  **/
 #pragma once
 
-#define C_RATE 0.03
-#define B_RATE 0.05
-#define A_RATE 0.07
-
-enum Grade { GRADE_A = 1, GRADE_B, GRADE_C, GRADE_D };
-enum GradeSetMoney { SET_A = 1000000000, SET_B = 100000000, SET_C = 10000000 };
+enum GradeSetMoney { SET_A = 1000000000, SET_B = 100000000, SET_C = 10000000 }; 
+//A= 10억, B= 1억, C=1천
 
 class Account
 {
@@ -19,7 +15,7 @@ protected:
 	int accID;
 	int balance;
 	char* cusName;
-	double interestRate;
+	double interestRate; 
 public:
 	Account();
 	Account(const Account& ref);
@@ -32,29 +28,30 @@ public:
 };
 
 // 통장 유형2 :  추가 이자 있는 거 (high) - A등급 (기본 이자 + A 이자), B등급 (기본 이자 + B 이자), C등급 (기본 이자 + C이자)
-class NormalAccount : Account {
+class NormalAccount : public Account {
 private:
 	double addInterestRate;
 public:
 	NormalAccount();
 	NormalAccount(const NormalAccount& ref);
-	NormalAccount(int ID, int money, char* name, int grade, double addInterestRate);
+	NormalAccount(int ID, int money, char* name);
 	void Deposit(int money);
-	void SetGrade(int grade);
-	int GetGrade();
 };
 
+
 // 통장 유형3 : 등급별 이체 수수료 차등 (ex) A - 없음, B - 50%........)
-class HighCreditAccount : Account {
+class HighCreditAccount : public Account {
 private:
+	enum Grade { GRADE_A = 1, GRADE_B, GRADE_C, GRADE_D }; //등급번호  
 	int grade;
 	double addInterestRate;
+	static double interestRate[4];
+	void SetGrade();
+	
 public:
 	HighCreditAccount();
-	HighCreditAccount(const HighCreditAccount& ref);
-	HighCreditAccount(int ID, int money, char* name, int grade, double addInterestRate);
-	void Deposit(int money);
-	void SetGrade(int grade);
+	HighCreditAccount(int ID, int money, char* name);
+	void Deposit(int money); 
 	int GetGrade();
 };
 
