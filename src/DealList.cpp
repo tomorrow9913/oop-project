@@ -2,7 +2,7 @@
  * File Name: DealList.cpp
  *
  * Description:
- * °èÁ¤ Á¤º¸ ÀúÀåÇÏ´Â DealListÀÇ ÇÔ¼ö ±¸Çö
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ DealListï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
  **/
 
 #include <iostream>
@@ -11,8 +11,8 @@
 using namespace std;
 
 /**
-* Function Name: DealList »ý¼ºÀÚ
-* Description: »ý¼ºÀÚ
+* Function Name: DealList ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+* Description: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * @param: int balance, int money, int year, int month, int date, string addresseID, string message
 * @return: x
 *
@@ -42,7 +42,7 @@ DealList::DealList() {
 
 /**
 * Function Name: setInfo
-* Description: ¸®½ºÆ® Á¤º¸ ¼³Á¤
+* Description: ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 * @param: int balance, int money, int year, int month, int date, string addresseID, string message
 * @return: void
 *
@@ -61,7 +61,7 @@ void DealList::setInfo(int balance, int money, int year, int month, int date, st
 
 /**
 * Function Name: getInfo
-* Description: DealList Á¤º¸¸¦ °¡Á®¿È
+* Description: DealList ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * @param: void
 * @return: DealList&
 *
@@ -73,7 +73,7 @@ DealList& DealList::getInfo() {
 
 /**
 * Function Name: operator<< 
-* Description: DealListÀÇ << ¿¬»êÀÚ Áßº¹ (friend)
+* Description: DealListï¿½ï¿½ << ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½ (friend)
 * @param: ostream&
 * @return: ostream& os, const DealList& dl
 *

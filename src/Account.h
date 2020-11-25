@@ -2,7 +2,7 @@
  * File Name: Account.h
  *
  * Description:
- * °èÁ¤ Á¤º¸¸¦ ÀúÀåÇÏ±â À§ÇÑ Å¬·¡½º Á¤ÀÇ
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  **/
 #pragma once
 #include <queue>
@@ -12,7 +12,7 @@ using namespace std;
 
 #define DEAL_LIST_MAX 50
 enum GradeSetMoney { SET_A = 1000000000, SET_B = 100000000, SET_C = 10000000 }; 
-//A= 10¾ï, B= 1¾ï, C=1Ãµ
+//A= 10ï¿½ï¿½, B= 1ï¿½ï¿½, C=1Ãµ
 
 class Account
 {
@@ -21,7 +21,7 @@ protected:
 	int balance;
 	char* cusName;
 	double interestRate; 
-	queue<DealList*> dealList; // ÃÖ±Ù °Å·¡ ³»¿ª
+	queue<DealList*> dealList; // ï¿½Ö±ï¿½ ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½
 public:
 	Account();
 	Account(const Account& ref);
@@ -33,11 +33,11 @@ public:
 	int Transfer(int money, Account& accAccount);
 	void ShowAccInfo() const;
 	void PrintDealList() const;
-	void AddDealList(int balance, int money, int year, int month, int date, string addressID, string message);
+	void AddDealList(int balance, int money, string addressID, string message);
 	~Account();
 };
 
-// ÅëÀå À¯Çü2 :  Ãß°¡ ÀÌÀÚ ÀÖ´Â °Å (high) - Aµî±Þ (±âº» ÀÌÀÚ + A ÀÌÀÚ), Bµî±Þ (±âº» ÀÌÀÚ + B ÀÌÀÚ), Cµî±Þ (±âº» ÀÌÀÚ + CÀÌÀÚ)
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2 :  ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ (high) - Aï¿½ï¿½ï¿½ (ï¿½âº» ï¿½ï¿½ï¿½ï¿½ + A ï¿½ï¿½ï¿½ï¿½), Bï¿½ï¿½ï¿½ (ï¿½âº» ï¿½ï¿½ï¿½ï¿½ + B ï¿½ï¿½ï¿½ï¿½), Cï¿½ï¿½ï¿½ (ï¿½âº» ï¿½ï¿½ï¿½ï¿½ + Cï¿½ï¿½ï¿½ï¿½)
 class NormalAccount : public Account {
 private:
 	double addInterestRate;
@@ -49,10 +49,10 @@ public:
 };
 
 
-// ÅëÀå À¯Çü3 : µî±Þº° ÀÌÃ¼ ¼ö¼ö·á Â÷µî (ex) A - ¾øÀ½, B - 50%........)
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3 : ï¿½ï¿½Þºï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ex) A - ï¿½ï¿½ï¿½ï¿½, B - 50%........)
 class HighCreditAccount : public Account {
 private:
-	enum Grade { GRADE_A = 1, GRADE_B, GRADE_C, GRADE_D }; //µî±Þ¹øÈ£  
+	enum Grade { GRADE_A = 1, GRADE_B, GRADE_C, GRADE_D }; //ï¿½ï¿½Þ¹ï¿½È£  
 	int grade;
 	double addInterestRate;
 	static double interestRate[4];

@@ -2,12 +2,13 @@
  * File Name: Account.cpp
  *
  * Description:
- * Account °´Ã¼¸¦ ±¸¼ºÇÏ±â À§ÇÑ ¸â¹ö ÇÔ¼ö Á¤ÀÇ ÆÄÀÏ
+ * Account ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  **/
 
 #include <iostream>
 #include <cstring>
 #include <queue>
+#include <time.h>
 #include "Account.h"
 #include "DealList.h"
 
@@ -25,6 +26,11 @@ Account::Account(int ID, int money, char* name)
 {
 	cusName = new char[strlen(name) + 1];
 	strcpy_s(cusName, (strlen(name) + 1), name);
+
+	string msg;
+	cout << "ì…ê¸ˆ ë©”ì‹œì§€ ì…ë ¥";
+	cin >> msg;
+	AddDealList(balance, money, "ê³„ì¢Œ ê°œì„¤", msg);
 }
 
 Account::Account(const Account& ref)
@@ -36,7 +42,7 @@ Account::Account(const Account& ref)
 
 /**
 * Function Name: GetAccID
-* Description: °èÁÂ¹øÈ£¸¦ ¹İÈ¯.
+* Description: ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½È¯.
 * @param: void
 * @return: accID(int)
 *
@@ -46,7 +52,7 @@ int Account::GetAccID() const { return accID; }
 
 /**
 * Function Name: Deposit
-* Description: ÀÔ±İ.
+* Description: ï¿½Ô±ï¿½.
 * @param: int
 * @return: void
 *
@@ -54,16 +60,24 @@ int Account::GetAccID() const { return accID; }
 **/
 void Account::Deposit(int money)
 {
-	int interest = (int)(money * interestRate);	// ±âº» ÀÌÀÚ
-	balance += interest + money;
+	int interest = (int)(money * interestRate);	// ê¸°ë³¸ ì´ì
+	balance += interest;
+
+	AddDealList(balance, interest, "ì˜ˆê¸ˆ ì´ì", "-");
+
+	string msg;
+	cout << "ì…ê¸ˆ ë©”ì‹œì§€ ì…ë ¥ : ";
+	cin >> msg;
+	balance += money;
+	AddDealList(balance, money, "ì…ê¸ˆ", msg);
 }
 /**
 * Function Name: NointerestRateDeposit
-* Description: ÀÌÃ¼ ½Ã ¹Ş´Â °èÁÂ ÀÜ¾× Áõ°¡.
+* Description: ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½Ş´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½ï¿½.
 * @param: int
 * @return: void
 *
-* Author:¹ÚÁÖ¿ë
+* Author:ï¿½ï¿½ï¿½Ö¿ï¿½
 **/
 void Account::NointerestRateDeposit(int money){
 	balance += money;
@@ -71,12 +85,12 @@ void Account::NointerestRateDeposit(int money){
 
 /**
 * Function Name: Withdraw
-* Description: Ãâ±İ
-*	Ãâ±İ ¼º°ø½Ã ÀÜ¾× ¹İÈ¯
-*	½ÇÆĞ½Ã ¿À·ù ÄÚµå(À½¼ö) ¹İÈ¯
-*	ERR_LACK(-1) : ÀÜ¾× ºÎÁ·
-* @param: int Ãâ±İ¾×
-* @return: int ÀÜ¾×
+* Description: ï¿½ï¿½ï¿½
+*	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¾ï¿½ ï¿½ï¿½È¯
+*	ï¿½ï¿½ï¿½Ğ½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½(ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½È¯
+*	ERR_LACK(-1) : ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+* @param: int ï¿½ï¿½İ¾ï¿½
+* @return: int ï¿½Ü¾ï¿½
 *
 * Author: Jeong MinGyu
 **/
@@ -86,12 +100,17 @@ int Account::Withdraw(int money)
 		return ERR_LACK;
 
 	balance -= money;
+	string msg;
+	cout << "ì¶œê¸ˆ ë©”ì‹œì§€ ì…ë ¥ : ";
+	cin >> msg;
+	AddDealList(balance, money, "ì¶œê¸ˆ", msg);
+
 	return balance;
 }
 
 /**
 * Function Name: ShowAccInfo
-* Description: °èÁÂ Á¤º¸ Ãâ·Â.
+* Description: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 * @param: void
 * @return: void
 *
@@ -99,14 +118,14 @@ int Account::Withdraw(int money)
 **/
 void Account::ShowAccInfo() const
 {
-	cout << "°èÁÂID: " << accID << endl;
-	cout << "ÀÌ  ¸§: " << cusName << endl;
-	cout << "ÀÜ  ¾×: " << balance << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ID: " << accID << endl;
+	cout << "ï¿½ï¿½  ï¿½ï¿½: " << cusName << endl;
+	cout << "ï¿½ï¿½  ï¿½ï¿½: " << balance << endl;
 }
 
 /**
 * Function Name: PrintDealList
-* Description: ÃÖ±Ù °Å·¡ ³»¿ª Ãâ·Â.
+* Description: ï¿½Ö±ï¿½ ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 * @param: void
 * @return: void
 *
@@ -114,29 +133,34 @@ void Account::ShowAccInfo() const
 **/
 void Account::PrintDealList() const {
 	queue<DealList*> copy = dealList;
-	
+
 	while (copy.size())
 	{
 		cout << *(copy.front());
 		copy.pop();
 	}
+	cout << "=============================" << endl;
 }
 
 /**
 * Function Name: AddDealList
-* Description: ÃÖ±Ù °Å·¡ ³»¿ª Ãß°¡.
+* Description: ìµœê·¼ ê±°ë˜ ë‚´ì—­ ì¶”ê°€.
 * @param: int balance, int money, int year, int month, int date, string addressID, string message
 * @return: void
-*¤¿
+*ã…
 * Author: Jeong MinGyu
 **/
-void Account::AddDealList(int balance, int money, int year, int month, int date, string addressID, string message) {
+void Account::AddDealList(int balance, int money, string addressID, string message) {
 	if (dealList.size() == DEAL_LIST_MAX) {
 		delete dealList.front();
 		dealList.pop();
 	}
-	
-	dealList.push(new DealList(balance, money, year, month, date, addressID, message));
+
+	time_t timer = time(NULL);
+	struct tm tm_info;
+	localtime_s(&tm_info ,&timer);
+
+	dealList.push(new DealList(balance, money, tm_info.tm_year + 1900, tm_info.tm_mon, tm_info.tm_mday, addressID, message));
 }
 
 Account::~Account()
@@ -144,18 +168,11 @@ Account::~Account()
 	delete[]cusName;
 }
 
-NormalAccount::NormalAccount() {
-	this->accID = 0;
-	this->balance = 0;
-	this->cusName = 0;
+NormalAccount::NormalAccount() :Account(0, 0, 0) {
 	this->addInterestRate = 0.01;
 };
 
-NormalAccount::NormalAccount(int ID, int money, char* name) {
-	this->accID = ID;
-	this->balance = money;
-	this->cusName = new char[strlen(name) + 1];
-	strcpy_s(this->cusName, (strlen(name) + 1), name);
+NormalAccount::NormalAccount(int ID, int money, char* name) :Account(ID, money, name) {
 	this->addInterestRate = 0.01;
 }
 
@@ -168,47 +185,40 @@ NormalAccount::NormalAccount(const NormalAccount& ref)
 
 double HighCreditAccount::interestRate[4] = { 0.07, 0.05, 0.03, 0 };
 
-HighCreditAccount::HighCreditAccount() {
-	this->accID = 0;
-	this->balance = 0;
-	this->cusName = 0;
+HighCreditAccount::HighCreditAccount() :Account(0, 0, 0) {
 	this->grade = 0;
 	this->addInterestRate = 0;
 };
 
-HighCreditAccount::HighCreditAccount(int ID, int money, char* name) {
-	this->accID = ID;
-	this->balance = money;
-	this->cusName = new char[strlen(name) + 1];
-	strcpy_s(this->cusName, (strlen(name) + 1), name);
-	if (this->balance >= SET_A)	{ this->grade = 1; this->addInterestRate = interestRate[this->grade - 1]; }
+HighCreditAccount::HighCreditAccount(int ID, int money, char* name) : Account(ID, money, name) {
+	if (this->balance >= SET_A) { this->grade = 1; this->addInterestRate = interestRate[this->grade - 1]; }
 	else if (this->balance >= SET_B) { this->grade = 2; this->addInterestRate = interestRate[this->grade - 1]; }
-	else if (this->balance >= SET_C) {this->grade = 3; this->addInterestRate = interestRate[this->grade - 1]; }
+	else if (this->balance >= SET_C) { this->grade = 3; this->addInterestRate = interestRate[this->grade - 1]; }
 	else { this->grade = 4; this->addInterestRate = interestRate[this->grade - 1]; }
 }
 
 /**
 * Function Name: SetGrade / GetGrade
-* Description: °èÁÂµî±Ş ¼³Á¤ ¹× ¹İÈ¯
+* Description: ê³„ì¢Œë“±ê¸‰ ì„¤ì • ë° ë°˜í™˜
 * @param: void / void
 * @return: void / int
 *
-* Author: 
-* - get È²ÁøÁÖ
+* Author:
+* - get í™©ì§„ì£¼
 * - set Jeong MinGyu
 **/
 void HighCreditAccount::SetGrade() {
 	if (balance >= SET_C && balance < SET_B) {
 		grade = GRADE_C;
-		addInterestRate = interestRate[grade-1];
+		addInterestRate = interestRate[grade - 1];
 	}
 	else if (balance >= SET_B && balance < SET_A) {
 		grade = GRADE_B;
-		addInterestRate = interestRate[grade-1];
+		addInterestRate = interestRate[grade - 1];
 	}
 	else if (balance >= SET_A) {
 		grade = GRADE_A;
-		addInterestRate = interestRate[grade-1];
+		addInterestRate = interestRate[grade - 1];
 	}
 }
 
@@ -218,40 +228,42 @@ int HighCreditAccount::GetGrade() {
 
 /**
 * Function Name: Deposit
-* Description: ÀÔ±İ
+* Description: ì…ê¸ˆ
 * @param: int money
 * @return: void
 *
-* Author: ³²À¯Á¤, ¹ÚÁÖ¿ë, ÀÌ½Â¹Î, Á¤¹Î±Ô
+* Author: ë‚¨ìœ ì •, ë°•ì£¼ìš©, ì´ìŠ¹ë¯¼, ì •ë¯¼ê·œ
 **/
-void NormalAccount::Deposit(int money){
+void NormalAccount::Deposit(int money) {
 	Account::Deposit(money);
 }
 
 /**
 * Function Name: Deposit
-* Description: ÀÔ±İ
+* Description: ì…ê¸ˆ
 * @param: int money
 * @return: void
 *
-* Author: ³²À¯Á¤, ¹ÚÁÖ¿ë, ÀÌ½Â¹Î, Á¤¹Î±Ô
+* Author: ë‚¨ìœ ì •, ë°•ì£¼ìš©, ì´ìŠ¹ë¯¼, ì •ë¯¼ê·œ
 **/
-void HighCreditAccount::Deposit(int money){
-	//µî±Ş È®ÀÎ
+void HighCreditAccount::Deposit(int money) {
+	//ë“±ê¸‰ í™•ì¸
 	SetGrade();
-	Account::Deposit(money); //±âº» ÀÌÀÚ
-	balance += (int)(money * addInterestRate); //µî±Şº° ÀÌÀÚ
+	Account::Deposit(money); //ê¸°ë³¸ ì´ì
+
+	balance += (int)(money * addInterestRate); //ë“±ê¸‰ë³„ ì´ì
+	AddDealList(balance, addInterestRate, "ë“±ê¸‰ ì´ì", "-");
 }
 
 /**
 * Function Name: Transfer
-* Description: ÀÌÃ¼
+* Description: ï¿½ï¿½Ã¼
 * @param: int money, Account accAccount
 * @return: int
 *
-* Author: ³²À¯Á¤, ¹ÚÁÖ¿ë
+* Author: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ö¿ï¿½
 **/
-int Account::Transfer(int money, Account& accAccount) {//¹Ş´Â °èÁÂ
+int Account::Transfer(int money, Account& accAccount) {//ï¿½Ş´ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if(balance > money){
 		balance-=money;
 		accAccount.NointerestRateDeposit(money);
