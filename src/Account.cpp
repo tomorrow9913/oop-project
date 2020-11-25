@@ -113,7 +113,7 @@ void Account::PrintDealList() const {
 
 /**
 * Function Name: AddDealList
-* Description: 최근 거래 내역 축.
+* Description: 최근 거래 내역 추가.
 * @param: int balance, int money, int year, int month, int date, string addressID, string message
 * @return: void
 *ㅏ
