@@ -7,7 +7,9 @@
 
 #include <iostream>
 #include <cstring>
+#include <queue>
 #include "Account.h"
+#include "DealList.h"
 
 using namespace std;
 
@@ -89,7 +91,41 @@ void Account::ShowAccInfo() const
 	cout << "계좌ID: " << accID << endl;
 	cout << "이  름: " << cusName << endl;
 	cout << "잔  액: " << balance << endl;
+}
+
+/**
+* Function Name: PrintDealList
+* Description: 최근 거래 내역 출력.
+* @param: void
+* @return: void
+*
+* Author: Jeong MinGyu
+**/
+void Account::PrintDealList() const {
+	queue<DealList*> copy = dealList;
 	
+	while (copy.size())
+	{
+		cout << *(copy.front());
+		copy.pop();
+	}
+}
+
+/**
+* Function Name: AddDealList
+* Description: 최근 거래 내역 축.
+* @param: int balance, int money, int year, int month, int date, string addressID, string message
+* @return: void
+*ㅏ
+* Author: Jeong MinGyu
+**/
+void Account::AddDealList(int balance, int money, int year, int month, int date, string addressID, string message) {
+	if (dealList.size() == DEAL_LIST_MAX) {
+		delete dealList.front();
+		dealList.pop();
+	}
+	
+	dealList.push(new DealList(balance, money, year, month, date, addressID, message));
 }
 
 Account::~Account()
