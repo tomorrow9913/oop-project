@@ -2,28 +2,33 @@
  * File Name: DealList.cpp
  *
  * Description:
- * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ DealListï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+ * °èÁ¤ Á¤º¸ ÀúÀåÇÏ´Â DealListÀÇ ÇÔ¼ö ±¸Çö
  **/
 
 #include <iostream>
+#include <time.h>
 #include "DealList.h"
 
 using namespace std;
 
 /**
-* Function Name: DealList ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-* Description: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+* Function Name: DealList »ý¼ºÀÚ
+* Description: »ý¼ºÀÚ
 * @param: int balance, int money, int year, int month, int date, string addresseID, string message
 * @return: x
 *
 * Author: Jeong MinGyu
 **/
-DealList::DealList(int balance, int money, int year, int month, int date, string addressID, string message) {
+DealList::DealList(int balance, int money, string addressID, string message) {
+    time_t timer = time(NULL);
+    struct tm tm_info;
+    localtime_s(&tm_info, &timer);
+
     this->balance = balance;
     this->money = money;
-    this->year = year;
-    this->month = month;
-    this->date = date;
+    this->year = tm_info.tm_year + 1900;
+    this->month = tm_info.tm_mon;
+    this->date = tm_info.tm_mday;
 
     this->addressID = addressID;
     this->message = message;
@@ -42,7 +47,7 @@ DealList::DealList() {
 
 /**
 * Function Name: setInfo
-* Description: ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+* Description: ¸®½ºÆ® Á¤º¸ ¼³Á¤
 * @param: int balance, int money, int year, int month, int date, string addresseID, string message
 * @return: void
 *
@@ -61,7 +66,7 @@ void DealList::setInfo(int balance, int money, int year, int month, int date, st
 
 /**
 * Function Name: getInfo
-* Description: DealList ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+* Description: DealList Á¤º¸¸¦ °¡Á®¿È
 * @param: void
 * @return: DealList&
 *
@@ -73,7 +78,7 @@ DealList& DealList::getInfo() {
 
 /**
 * Function Name: operator<< 
-* Description: DealListï¿½ï¿½ << ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½ (friend)
+* Description: DealListÀÇ << ¿¬»êÀÚ Áßº¹ (friend)
 * @param: ostream&
 * @return: ostream& os, const DealList& dl
 *

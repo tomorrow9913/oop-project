@@ -23,7 +23,7 @@ private:
 
 public:
 	DealList();
-	DealList(int balance, int money, int year, int month, int date, string addresseID, string message);
+	DealList(int balance, int money, string addresseID, string message);
 	DealList& getInfo();
 	void setInfo(int balance, int money, int year, int month, int date, string addresseID, string message);	
 };
