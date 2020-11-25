@@ -18,15 +18,26 @@ using namespace std;
 *
 * Author: Jeong MinGyu
 **/
-DealList::DealList(int balance, int money, int year, int month, int date, string addresseID, string message) {
+DealList::DealList(int balance, int money, int year, int month, int date, string addressID, string message) {
     this->balance = balance;
     this->money = money;
     this->year = year;
     this->month = month;
     this->date = date;
 
-    this->addresseID = addresseID;
-    this->addresseID = addresseID;
+    this->addressID = addressID;
+    this->message = message;
+}
+
+DealList::DealList() {
+    this->balance = 1900;
+    this->money = -1;
+    this->year = 1;
+    this->month = 1;
+    this->date = 1;
+
+    this->addressID = "";
+    this->message = "";
 }
 
 /**
@@ -44,8 +55,8 @@ void DealList::setInfo(int balance, int money, int year, int month, int date, st
     this->month = month;
     this->date = date;
 
-    this->addresseID = addresseID;
-    this->addresseID = addresseID;
+    this->addressID = addresseID;
+    this->message = message;
 }
 
 /**
@@ -71,6 +82,6 @@ DealList& DealList::getInfo() {
 ostream& operator<<(ostream& os, const DealList& dl)
 {
     os << "=============================" << endl;
-    os << dl.year << "/" << dl.month << "/" << dl.date << "\t" << dl.addresseID << "\t" << dl.message << "\t" << dl.money << "\t" << dl.balance << endl;
+    os << dl.year << "/" << dl.month << "/" << dl.date << "\t" << dl.addressID << "\t" << dl.message << "\t" << dl.money << "\t" << dl.balance << endl;
     return os;
 }
