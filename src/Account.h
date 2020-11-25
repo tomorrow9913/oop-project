@@ -28,7 +28,9 @@ public:
 	Account(int ID, int money, char* name);
 	int GetAccID() const;
 	virtual void Deposit(int money); 
+	virtual void NointerestRateDeposit(int money);
 	int Withdraw(int money);
+	int Transfer(int money, Account& accAccount);
 	void ShowAccInfo() const;
 	void PrintDealList() const;
 	void AddDealList(int balance, int money, int year, int month, int date, string addressID, string message);

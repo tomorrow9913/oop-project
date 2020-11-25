@@ -57,6 +57,17 @@ void Account::Deposit(int money)
 	int interest = (int)(money * interestRate);	// 기본 이자
 	balance += interest + money;
 }
+/**
+* Function Name: NointerestRateDeposit
+* Description: 이체 시 받는 계좌 잔액 증가.
+* @param: int
+* @return: void
+*
+* Author:박주용
+**/
+void Account::NointerestRateDeposit(int money){
+	balance += money;
+}
 
 /**
 * Function Name: Withdraw
@@ -230,4 +241,22 @@ void HighCreditAccount::Deposit(int money){
 	SetGrade();
 	Account::Deposit(money); //기본 이자
 	balance += (int)(money * addInterestRate); //등급별 이자
+}
+
+/**
+* Function Name: Transfer
+* Description: 이체
+* @param: int money, Account accAccount
+* @return: int
+*
+* Author: 남유정, 박주용
+**/
+int Account::Transfer(int money, Account& accAccount) {//받는 계좌
+	if(balance > money){
+		balance-=money;
+		accAccount.NointerestRateDeposit(money);
+		return money;
+	}
+	else
+		return ERR_LACK;
 }
