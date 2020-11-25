@@ -2,7 +2,7 @@
  * File Name: AccountHandler.cpp
  *
  * Description:
- * AccountHandler Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ * AccountHandler Å¬·¡½º Á¤ÀÇ ÆÄÀÏ
  **/
 
 #include <iostream>
@@ -11,7 +11,7 @@
 using namespace std;
 /**
 * Function Name: ShowMenu
-* Description: ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+* Description: ¸ÞÀÎ ¸Þ´º¸¦ Ãâ·ÂÇÑ´Ù.
 * @param: void
 * @return: void
 *
@@ -20,17 +20,17 @@ using namespace std;
 void AccountHandler::ShowMenu(void) const
 {
 	cout << "-----Menu------" << endl;
-	cout << "1. ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½" << endl;
-	cout << "2. ï¿½ï¿½    ï¿½ï¿½" << endl;
-	cout << "3. ï¿½ï¿½    ï¿½ï¿½" << endl;
-	cout << "4. ï¿½ï¿½    ï¿½ï¿½" << endl;
-	cout << "5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½" << endl;
-	cout << "6. ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½" << endl;
+	cout << "1. °èÁÂ°³¼³" << endl;
+	cout << "2. ÀÔ    ±Ý" << endl;
+	cout << "3. Ãâ    ±Ý" << endl;
+	cout << "4. ¼Û    ±Ý" << endl;
+	cout << "5. °èÁÂÁ¤º¸ ÀüÃ¼ Ãâ·Â" << endl;
+	cout << "6. ÇÁ·Î±×·¥ Á¾·á" << endl;
 }
 
 /**
 * Function Name: MakeAccount
-* Description: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+* Description: °èÁÂ °³¼³.
 * @param: void
 * @return: void
 *
@@ -43,13 +43,13 @@ void AccountHandler::MakeAccount(void)
 	char name[NAME_LEN];
 	int balance;
 
-	cout << "[ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½]" << endl;
-	cout << "\t1. ï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½(NormalAccount)" << endl;
-	cout << "\t2. ï¿½Å¿ï¿½ï¿½ï¿½ï¿½(HighCreditAccount)" << endl;
-	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ : "; cin >> type; cout << endl;
-	cout << "ï¿½ï¿½ï¿½ï¿½ID: ";	cin >> id;
-	cout << "ï¿½ï¿½  ï¿½ï¿½: ";	cin >> name;
-	cout << "ï¿½Ô±Ý¾ï¿½: ";	cin >> balance;
+	cout << "[°èÁÂ°³¼³]" << endl;
+	cout << "\t1. ÀÔÃâ±Ý°èÁÂ(NormalAccount)" << endl;
+	cout << "\t2. ½Å¿ë°èÁÂ(HighCreditAccount)" << endl;
+	cout << "°èÁÂ Ç×¸ñ ¼±ÅÃ : "; cin >> type; cout << endl;
+	cout << "°èÁÂID: ";	cin >> id;
+	cout << "ÀÌ  ¸§: ";	cin >> name;
+	cout << "ÀÔ±Ý¾×: ";	cin >> balance;
 	cout << endl;
 
 	if (type == 1) {
@@ -62,7 +62,7 @@ void AccountHandler::MakeAccount(void)
 
 /**
 * Function Name: DepositMoney
-* Description: ï¿½Ô±ï¿½.
+* Description: ÀÔ±Ý.
 * @param: void
 * @return: void
 *
@@ -72,25 +72,25 @@ void AccountHandler::DepositMoney(void)
 {
 	int money;
 	int id;
-	cout << "[ï¿½ï¿½    ï¿½ï¿½]" << endl;
-	cout << "ï¿½ï¿½ï¿½ï¿½ID: ";	cin >> id;
-	cout << "ï¿½Ô±Ý¾ï¿½: ";	cin >> money;
+	cout << "[ÀÔ    ±Ý]" << endl;
+	cout << "°èÁÂID: ";	cin >> id;
+	cout << "ÀÔ±Ý¾×: ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
 			accArr[i]->Deposit(money);
-			cout << "ï¿½Ô±Ý¿Ï·ï¿½" << endl << endl;
+			cout << "ÀÔ±Ý¿Ï·á" << endl << endl;
 			return;
 		}
 	}
-	cout << "ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½Ô´Ï´ï¿½." << endl << endl;
+	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
 }
 
 /**
 * Function Name: WithdrawMoney
-* Description: ï¿½ï¿½ï¿½.
+* Description: Ãâ±Ý.
 * @param: void
 * @return: void
 *
@@ -101,9 +101,9 @@ void AccountHandler::WithdrawMoney(void)
 	int money;
 	int id;
 
-	cout << "[ï¿½ï¿½    ï¿½ï¿½]" << endl;
-	cout << "ï¿½ï¿½ï¿½ï¿½ID: ";	cin >> id;
-	cout << "ï¿½ï¿½Ý¾ï¿½: ";	cin >> money;
+	cout << "[Ãâ    ±Ý]" << endl;
+	cout << "°èÁÂID: ";	cin >> id;
+	cout << "Ãâ±Ý¾×: ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
@@ -111,62 +111,62 @@ void AccountHandler::WithdrawMoney(void)
 		{
 			if (accArr[i]->Withdraw(money) < 0)
 			{
-				cout << "ï¿½Ü¾×ºï¿½ï¿½ï¿½" << endl << endl;
+				cout << "ÀÜ¾×ºÎÁ·" << endl << endl;
 				return;
 			}
 
-			cout << "ï¿½ï¿½Ý¿Ï·ï¿½" << endl << endl;
+			cout << "Ãâ±Ý¿Ï·á" << endl << endl;
 			return;
 		}
 	}
-	cout << "ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½Ô´Ï´ï¿½." << endl << endl;
+	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
 }
 
 /**
 * Function Name:TransferMoney
-* Description: ï¿½Û±ï¿½
+* Description: ¼Û±Ý
 * @param: void
 * @return: void
 *
-* Author: - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ö¿ï¿½
+* Author: - ³²À¯Á¤, ¹ÚÁÖ¿ë
 **/
 void AccountHandler::TransferMoney(void) {
 	int money;
 	int id, accid;
 
-	cout << "[ï¿½ï¿½    ï¿½ï¿½]" << endl;
-	cout << "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ID: ";	cin >> id;
-	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ID: "; cin >> accid;
-	cout << "ï¿½Û±Ý¾ï¿½ ";	cin >> money;
+	cout << "[¼Û    ±Ý]" << endl;
+	cout << "³» °èÁÂID: ";	cin >> id;
+	cout << "¹ÞÀ» °èÁÂID: "; cin >> accid;
+	cout << "¼Û±Ý¾× ";	cin >> money;
 
 	for (int i = 0; i < accNum; i++)
 	{
-		if (accArr[i]->GetAccID() == id)//idï¿½ï¿½ Ã£ï¿½ï¿½ ifï¿½ï¿½
+		if (accArr[i]->GetAccID() == id)//id¸¦ Ã£´Â if¹®
 		{
 			for (int j = 0; j < accNum; j++)
 			{
-				if (accArr[j]->GetAccID() == accid)//accdï¿½ï¿½ Ã£ï¿½ï¿½ ifï¿½ï¿½
+				if (accArr[j]->GetAccID() == accid)//accd¸¦ Ã£´Â if¹®
 				{
 					if (accArr[i]->Transfer(money, *accArr[j]) > 0) {
-						cout << "ï¿½Û±Ý¿Ï·ï¿½" << endl << endl;
+						cout << "¼Û±Ý¿Ï·á" << endl << endl;
 						return;
 					}
-					cout << "ï¿½Ü¾×ºï¿½ï¿½ï¿½" << endl << endl;
+					cout << "ÀÜ¾×ºÎÁ·" << endl << endl;
 					return;
 				}				
 			}
-			cout << "ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½Ô´Ï´ï¿½." << endl << endl;
+			cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
 			return;
 		}
 	}
-	cout << "ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½Ô´Ï´ï¿½." << endl << endl;
+	cout << "À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù." << endl << endl;
 }
 
-// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½Ô·Â½ï¿½
+// µ¿ÀÏ °èÁÂ¸¦ ÀÔ·Â½Ã
 
 /**
 * Function Name: ShowAllAccInfo
-* Description: ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
+* Description: ÀüÃ¼ °èÁÂ Ãâ·Â.
 * @param: void
 * @return: void
 *

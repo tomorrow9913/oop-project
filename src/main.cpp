@@ -1,4 +1,4 @@
-/**
+﻿/**
  * File Name:  main.cpp
  *
  * Description: ���� �ùķ��̼� ���� ���α׷�
@@ -23,7 +23,7 @@ int main(void)
 	while (1)
 	{
 		manager.ShowMenu();
-		cout << "����: ";
+		cout << "선택: ";
 		cin >> choice;
 		cout << endl;
 
