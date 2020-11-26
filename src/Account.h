@@ -41,32 +41,4 @@ public:
 	~Account();
 };
 
-// 통장 유형2 :  추가 이자 있는 거 (high) - A등급 (기본 이자 + A 이자), B등급 (기본 이자 + B 이자), C등급 (기본 이자 + C이자)
-class NormalAccount : public Account {
-private:
-	double addInterestRate;
-public:
-	NormalAccount();
-	NormalAccount(const NormalAccount& ref);
-	NormalAccount(int ID, int money, char* name);
-	void Deposit(int money);
-};
-
-
-// 통장 유형3 : 등급별 이체 수수료 차등 (ex) A - 없음, B - 50%........)
-class HighCreditAccount : public Account {
-private:
-	enum Grade { GRADE_A = 1, GRADE_B, GRADE_C, GRADE_D }; //등급번호
-	int grade;
-	double addInterestRate;
-	static double interestRate[4];
-	void SetGrade();
-	
-public:
-	HighCreditAccount();
-	HighCreditAccount(int ID, int money, char* name);
-	void Deposit(int money); 
-	int GetGrade();
-};
-
 #define ERR_LACK -1

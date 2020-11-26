@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include "AccountHandler.h"
+#include "HighCreditAccount.h"
+#include "NormalAccount.h"
 
 using namespace std;
 /**

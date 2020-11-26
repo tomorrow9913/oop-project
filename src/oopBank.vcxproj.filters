@@ -27,6 +27,12 @@
     <ClCompile Include="DealList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NormalAccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HighCreditAccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DealList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalAccount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HighCreditAccount.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
