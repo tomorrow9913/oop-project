@@ -1,7 +1,7 @@
-ï»¿/**
+/**
  * File Name:  main.cpp
  *
- * Description: ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¹Ä·ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½
+ * Description: ÀºÇà ½Ã¹Ä·¹ÀÌ¼Ç ¸ÞÀÎ ÇÁ·Î±×·¥
  **/
 #include <iostream>
 #include "Account.h"
@@ -11,9 +11,6 @@ using namespace std;
 
 enum SelectMenu{ MAKE = 1, DEPOSIT, WITHDRAW, TRANSFER,INQUIRE, EXIT };
 
- /** 
- ï¿½ï¿½Æ®ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ AccountHandler ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ main ï¿½Ô¼ï¿½
- **/
 
 int main(void)
 {
@@ -23,7 +20,7 @@ int main(void)
 	while (1)
 	{
 		manager.ShowMenu();
-		cout << "ì„ íƒ: ";
+		cout << "¼±ÅÃ: ";
 		cin >> choice;
 		cout << endl;
 
