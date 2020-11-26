@@ -18,6 +18,7 @@ public:
 	void ShowMenu(void) const;
 	void MakeAccount(void);
 	void DepositMoney(void);
+	void TransferMoney(void);
 	void WithdrawMoney(void);
 	void ShowAllAccInfo(void) const;
 	~AccountHandler();

@@ -23,8 +23,9 @@ void AccountHandler::ShowMenu(void) const
 	cout << "1. 계좌개설" << endl;
 	cout << "2. 입    금" << endl;
 	cout << "3. 출    금" << endl;
-	cout << "4. 계좌정보 전체 출력" << endl;
-	cout << "5. 프로그램 종료" << endl;
+	cout << "4. 송    금" << endl;
+	cout << "5. 계좌정보 전체 출력" << endl;
+	cout << "6. 프로그램 종료" << endl;
 }
 
 /**
@@ -96,7 +97,7 @@ void AccountHandler::DepositMoney(void)
 * Author: -
 **/
 void AccountHandler::WithdrawMoney(void)
-{
+{ 
 	int money;
 	int id;
 
@@ -120,6 +121,48 @@ void AccountHandler::WithdrawMoney(void)
 	}
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
 }
+
+/**
+* Function Name:TransferMoney
+* Description: 송금
+* @param: void
+* @return: void
+*
+* Author: - 남유정, 박주용
+**/
+void AccountHandler::TransferMoney(void) {
+	int money;
+	int id, accid;
+
+	cout << "[송    금]" << endl;
+	cout << "내 계좌ID: ";	cin >> id;
+	cout << "받을 계좌ID: "; cin >> accid;
+	cout << "송금액 ";	cin >> money;
+
+	for (int i = 0; i < accNum; i++)
+	{
+		if (accArr[i]->GetAccID() == id)//id를 찾는 if문
+		{
+			for (int j = 0; j < accNum; j++)
+			{
+				if (accArr[j]->GetAccID() == accid)//accd를 찾는 if문
+				{
+					if (accArr[i]->Transfer(money, *accArr[j]) > 0) {
+						cout << "송금완료" << endl << endl;
+						return;
+					}
+					cout << "잔액부족" << endl << endl;
+					return;
+				}				
+			}
+			cout << "유효하지 않은 ID 입니다." << endl << endl;
+			return;
+		}
+	}
+	cout << "유효하지 않은 ID 입니다." << endl << endl;
+}
+
+// 동일 계좌를 입력시
 
 /**
 * Function Name: ShowAllAccInfo
