@@ -32,6 +32,7 @@ public:
 	int GetAccID() const;
 	virtual void Deposit(int money); 
 	virtual void NointerestRateDeposit(int money);
+	int getBalance();
 	int Withdraw(int money);
 	int Transfer(int money, Account& accAccount);
 	void ShowAccInfo() const;

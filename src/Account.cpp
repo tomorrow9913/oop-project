@@ -151,13 +151,13 @@ void Account::PrintDealList() const {
 *ㅏ
 * Author: Jeong MinGyu
 **/
-void Account::AddDealList(int balance, int money, string addressID, string message) {
+void Account::AddDealList(int balance, int money, string name, string message) {
 	if (dealList.size() == DEAL_LIST_MAX) {
 		delete dealList.front();
 		dealList.pop();
 	}
 	
-	dealList.push(new DealList(balance, money, addressID, message));
+	dealList.push(new DealList(balance, money, name, message));
 }
 
 Account::~Account()
@@ -296,9 +296,27 @@ void HighCreditAccount::Deposit(int money){
 int Account::Transfer(int money, Account& accAccount) {//받는 계좌
 	if(balance > money){
 		balance-=money;
+		string msg;
+		cout << "메시지를 입력하시오." << endl;
+		cin >> msg;
 		accAccount.NointerestRateDeposit(money);
+		this->AddDealList(this->getBalance(),-money, this->cusName, msg);
+        accAccount.AddDealList(accAccount.getBalance(),money,accAccount.cusName, msg);
 		return money;
 	}
 	else
 		return ERR_LACK;
+}
+
+/**
+* Function Name: getbalance
+* Description: 잔액 조회
+* @param: balance
+* @return: int
+*
+* Author: 남유정, 박주용
+**/
+
+int Account::getBalance(){
+	return this->balance;
 }

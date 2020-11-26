@@ -147,7 +147,7 @@ void AccountHandler::TransferMoney(void) {
 			{
 				if (accArr[j]->GetAccID() == accid)//accd를 찾는 if문
 				{
-					if (accArr[i]->Transfer(money, *accArr[j]) > 0) {
+					if (int returnMoney = accArr[i]->Transfer(money, *accArr[j]) > 0) {           
 						cout << "송금완료" << endl << endl;
 						return;
 					}
@@ -178,6 +178,7 @@ void AccountHandler::ShowAllAccInfo(void) const
 	{
 		accArr[i]->ShowAccInfo();
 		cout << endl;
+		accArr[i]->PrintDealList();
 	}
 }
 
