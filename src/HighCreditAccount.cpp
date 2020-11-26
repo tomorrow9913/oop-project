@@ -59,18 +59,10 @@ HighCreditAccount::HighCreditAccount(int ID, int money, char* name) :Account(ID,
 * - set Jeong MinGyu
 **/
 void HighCreditAccount::SetGrade() {
-	if (balance >= SET_C && balance < SET_B) {
-		grade = GRADE_C;
-		addInterestRate = interestRate[grade - 1];
-	}
-	else if (balance >= SET_B && balance < SET_A) {
-		grade = GRADE_B;
-		addInterestRate = interestRate[grade - 1];
-	}
-	else if (balance >= SET_A) {
-		grade = GRADE_A;
-		addInterestRate = interestRate[grade - 1];
-	}
+	if (this->balance >= SET_A) { this->grade = 1; this->addInterestRate = interestRate[this->grade - 1]; }
+	else if (this->balance >= SET_B) { this->grade = 2; this->addInterestRate = interestRate[this->grade - 1]; }
+	else if (this->balance >= SET_C) { this->grade = 3; this->addInterestRate = interestRate[this->grade - 1]; }
+	else { this->grade = 4; this->addInterestRate = interestRate[this->grade - 1]; }
 }
 
 int HighCreditAccount::GetGrade() {

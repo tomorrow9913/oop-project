@@ -9,8 +9,7 @@
 
 using namespace std;
 
-enum SelectMenu{ MAKE = 1, DEPOSIT, WITHDRAW, TRANSFER,INQUIRE, EXIT };
-
+enum SelectMenu{ MAKE = 1, DEPOSIT, WITHDRAW, TRANSFER,INQUIRE, SUSPENSION, EXIT };
 
 int main(void)
 {
@@ -40,6 +39,9 @@ int main(void)
 			break;
 		case INQUIRE:
 			manager.ShowAllAccInfo();
+			break;
+		case SUSPENSION:
+			manager.AccountSuspension();
 			break;
 		case EXIT:
 			return 0;

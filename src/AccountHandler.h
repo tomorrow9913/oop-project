@@ -20,6 +20,7 @@ public:
 	void DepositMoney(void);
 	void TransferMoney(void);
 	void WithdrawMoney(void);
+	void AccountSuspension(void);
 	void ShowAllAccInfo(void) const;
 	~AccountHandler();
 };

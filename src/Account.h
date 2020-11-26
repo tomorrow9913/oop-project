@@ -19,6 +19,7 @@ class Account
 protected:
 	int accID;
 	int balance;
+	bool activation;
 	char* cusName;
 	double interestRate; 
 	double interestRateCheck;
@@ -38,6 +39,8 @@ public:
 	void ShowAccInfo() const;
 	void PrintDealList() const;
 	void AddDealList(int balance, int money, string addressID, string message);
+	bool GetStatus();
+	bool ToggleStatus();
 	~Account();
 };
 

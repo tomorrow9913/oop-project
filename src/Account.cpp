@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cstring>
 #include <queue>
+#include <stack>
 #include <string>
 #include "Account.h"
 #include "DealList.h"
@@ -19,11 +20,13 @@ Account::Account() {
 	this->balance = 0;
 	this->cusName = 0;
 	this->interestRate = 0.01;
+	this->activation = true;
 }
 
 Account::Account(int ID, int money, char* name) 
 	: accID(ID), balance(money), interestRate(0.01)
 {
+	this->activation = true;
 	AddDealList(money, money, "계좌개설", "-");
 	cusName = new char[strlen(name) + 1];
 	strcpy_s(cusName, (strlen(name) + 1), name);
@@ -122,6 +125,7 @@ void Account::ShowAccInfo() const
 		cout << "등급: " << checkGrade << endl;
 	}
 	cout << "이자:" << interestRateCheck << endl;
+	cout << "활성화 여부:" << activation << endl;
 }
 
 /**
@@ -134,11 +138,17 @@ void Account::ShowAccInfo() const
 **/
 void Account::PrintDealList() const {
 	queue<DealList*> copy = dealList;
+	stack<DealList*> sortRecent;
 	
 	while (copy.size())
 	{
-		cout << *(copy.front());
+		sortRecent.push(copy.front());
 		copy.pop();
+	}
+
+	while(sortRecent.size()){
+		cout << *(sortRecent.top());
+		sortRecent.pop();
 	}
 	cout << "=============================" << endl;
 }
@@ -148,7 +158,7 @@ void Account::PrintDealList() const {
 * Description: 최근 거래 내역 추가.
 * @param: int balance, int money, int year, int month, int date, string addressID, string message
 * @return: void
-*ㅏ
+*
 * Author: Jeong MinGyu
 **/
 void Account::AddDealList(int balance, int money, string name, string message) {
@@ -174,18 +184,32 @@ Account::~Account()
 * Author: 남유정, 박주용
 **/
 int Account::Transfer(int money, Account& accAccount) {//받는 계좌
-	if(balance > money){
-		balance-=money;
-		string msg;
+	int fee;
+	string msg;
+	
+	if (this->balance >= SET_A) fee = 100;
+	else if (this->balance < SET_A && this->balance >= SET_B) fee = 300;
+	else if (this->balance < SET_B && this->balance > SET_C) fee = 500;
+	else fee = 700;
+
+	if (this->balance >= fee + money) {
 		cout << "메시지를 입력하시오." << endl;
 		cin >> msg;
+
+		balance -= money;
+		this->AddDealList(this->getBalance(), -money, this->cusName, msg);
+		balance -= fee;
+		this->AddDealList(this->getBalance(), -fee, "송금수수료", "-");
+		
 		accAccount.NointerestRateDeposit(money);
-		this->AddDealList(this->getBalance(),-money, this->cusName, msg);
-        accAccount.AddDealList(accAccount.getBalance(),money,accAccount.cusName, msg);
+		accAccount.AddDealList(accAccount.getBalance(), money, accAccount.cusName, msg);
+
 		return money;
 	}
-	else
+	else {
+		cout << "잔액이 부족합니다." << endl;
 		return ERR_LACK;
+	}	
 }
 
 /**
@@ -196,7 +220,30 @@ int Account::Transfer(int money, Account& accAccount) {//받는 계좌
 *
 * Author: 남유정, 박주용
 **/
-
 int Account::getBalance(){
 	return this->balance;
+}
+
+/**
+* Function Name: GetStatus
+* Description: 계좌 활성화 여부 확인
+* @param: void
+* @return: bool
+*
+* Author: 남유정, 정민규
+**/
+bool Account::GetStatus() {
+	return this->activation;
+}
+
+/**
+* Function Name: ToggleStatus
+* Description: 계좌 활성화
+* @param: void
+* @return: bool
+*
+* Author: 남유정, 정민규
+**/
+bool Account::ToggleStatus() {
+	return this->activation = this->activation ? false : true;
 }
