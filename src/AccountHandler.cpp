@@ -135,7 +135,7 @@ void AccountHandler::WithdrawMoney(void)
 				cout << "(" << accArr[i]->ChageWorngPW(1) << "회 틀림)" << endl << endl;
 				return;
 			}
-			accArr[i]->ChageWorngPW(0);
+			else accArr[i]->ChageWorngPW(0);
 			if (accArr[i]->Withdraw(money) < 0)
 			{
 				cout << "잔액부족" << endl << endl;
@@ -181,7 +181,7 @@ void AccountHandler::TransferMoney(void) {
 				cout << "(" << accArr[i]->ChageWorngPW(1) << "회 틀림)" << endl << endl;
 				return;
 			}
-			accArr[i]->ChageWorngPW(0);
+			else accArr[i]->ChageWorngPW(0);
 			if(!accArr[i]->GetStatus()){
 				cout << "정지된 계좌입니다." << endl << endl;
 				return;
