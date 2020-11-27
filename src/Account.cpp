@@ -151,12 +151,12 @@ void Account::PrintDealList() const {
 		sortRecent.push(copy.front());
 		copy.pop();
 	}
-
+	cout << "일시\t\t\t거래내용\t메시지\t변동금액\t잔액" << endl;
+	cout << "=============================" << endl;
 	while(sortRecent.size()){
 		cout << *(sortRecent.top());
 		sortRecent.pop();
 	}
-	cout << "=============================" << endl;
 }
 
 /**

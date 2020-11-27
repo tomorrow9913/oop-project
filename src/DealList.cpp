@@ -83,7 +83,7 @@ DealList& DealList::getInfo() {
 **/
 ostream& operator<<(ostream& os, const DealList& dl)
 {
-    os << "=============================" << endl;
     os << dl.timestamp << "\t" << dl.addressID << "\t" << dl.message << "\t" << dl.money << "\t" << dl.balance << endl;
+    os << "=============================" << endl;
     return os;
 }
