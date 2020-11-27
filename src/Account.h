@@ -19,12 +19,14 @@ class Account
 protected:
 	int accID;
 	int balance;
+	int wrongCnt;
 	bool activation;
 	char* cusName;
 	double interestRate; 
 	double interestRateCheck;
 	const char* typeCheck;	
-	const char* checkGrade;	
+	const char* checkGrade;
+	string pass;
 	queue<DealList*> dealList;// 최근 거래 내역
 public:
 	Account();
@@ -41,6 +43,10 @@ public:
 	void AddDealList(int balance, int money, string addressID, string message);
 	bool GetStatus();
 	bool ToggleStatus();
+	string GetPW();
+	void SetPW(string PW);
+	string InputPw();
+	int ChageWorngPW(bool mode);
 	~Account();
 };
 

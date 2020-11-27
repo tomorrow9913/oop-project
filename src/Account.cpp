@@ -6,6 +6,7 @@
  **/
 
 #include <iostream>
+#include <conio.h>
 #include <cstring>
 #include <queue>
 #include <stack>
@@ -17,16 +18,20 @@ using namespace std;
 
 Account::Account() {
 	this->accID = 0;
+	this->wrongCnt = 0;
 	this->balance = 0;
 	this->cusName = 0;
 	this->interestRate = 0.01;
 	this->activation = true;
+	this->pass = "1111";
 }
 
 Account::Account(int ID, int money, char* name) 
 	: accID(ID), balance(money), interestRate(0.01)
 {
 	this->activation = true;
+	this->wrongCnt = 0;
+	this->pass = InputPw();
 	AddDealList(money, money, "계좌개설", "-");
 	cusName = new char[strlen(name) + 1];
 	strcpy_s(cusName, (strlen(name) + 1), name);
@@ -35,6 +40,7 @@ Account::Account(int ID, int money, char* name)
 Account::Account(const Account& ref)
 	: accID(ref.accID), balance(ref.balance), interestRate(ref.interestRate)
 {
+	pass = ref.pass;
 	cusName = new char[strlen(ref.cusName) + 1];
 	strcpy_s(cusName, (strlen(ref.cusName) + 1), ref.cusName);
 }
@@ -246,4 +252,71 @@ bool Account::GetStatus() {
 **/
 bool Account::ToggleStatus() {
 	return this->activation = this->activation ? false : true;
+}
+
+/**
+* Function Name: GetPW
+* Description: 비밀번호 조회
+* @param: void
+* @return: string
+*
+* Author: Jeong MinGyu
+**/
+string Account::GetPW() {
+	return this->pass;
+}
+
+/**
+* Function Name: SetPW
+* Description: 비밀번호 변경
+* @param: string;
+* @return: void
+*
+* Author: Jeong MinGyu
+**/
+void Account::SetPW(string PW) {
+	this->pass = PW;
+}
+
+/**
+* Function Name: InputPw
+* Description: 비밀번호 입력
+* @param: void
+* @return: string
+*
+* Author: Jeong MinGyu
+**/
+string Account::InputPw() {
+	fflush(stdin);
+	string tmp;
+	cout << "비밀번호 입력: ____\b\b\b\b";
+	for (int i = 0; i < 4; i++)
+	{
+		tmp += _getch();
+		cout << "*";
+	}
+	fflush(stdin);
+	cout << endl;
+
+	return tmp;
+}
+
+/**
+* Function Name: addWorngPW
+* Description: 비밀번호 틀린 횟수 증가 && 횟수 초과시 계좌 정지
+* @param: bool(false - 초기화, true - 증가)
+* @return: int(비밀번호 틀릿 횟수)
+*
+* Author: Jeong MinGyu
+**/
+int Account::ChageWorngPW(bool mode) {
+	if (mode) {
+		++(this->wrongCnt);
+		//TODO 아래 3회 횟수 고정해둔거 기호 상수로 빼주세요.
+		if (this->wrongCnt > 3 && this->GetStatus()) {
+			this->ToggleStatus();
+		}
+		return this->wrongCnt;
+	}
+	return this->wrongCnt = 0;
 }

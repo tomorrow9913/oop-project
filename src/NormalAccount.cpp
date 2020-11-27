@@ -7,9 +7,6 @@
 #include "NormalAccount.h"
 
 NormalAccount::NormalAccount() :Account(0, 0, NULL) {
-	this->accID = 0;
-	this->balance = 0;
-	this->cusName = 0;
 	this->addInterestRate = 0.01;
 	this->typeCheck = "NormalAccount";
 };

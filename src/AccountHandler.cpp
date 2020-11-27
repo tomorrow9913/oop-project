@@ -129,6 +129,13 @@ void AccountHandler::WithdrawMoney(void)
 				cout << "정지된 계좌입니다." << endl << endl;
 				return;
 			}
+			//TODO 비번 틀린거 횟수 조절하는 함수 기호 상수로 바꿔주세요
+			if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
+				cout << "비밀번호가 다릅니다.";
+				cout << "(" << accArr[i]->ChageWorngPW(1) << "회 틀림)" << endl << endl;
+				return;
+			}
+			accArr[i]->ChageWorngPW(0);
 			if (accArr[i]->Withdraw(money) < 0)
 			{
 				cout << "잔액부족" << endl << endl;
@@ -168,6 +175,13 @@ void AccountHandler::TransferMoney(void) {
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
+			//TODO 비번 틀린거 횟수 조절하는 함수 기호 상수로 바꿔주세요
+			if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
+				cout << "비밀번호가 다릅니다.";
+				cout << "(" << accArr[i]->ChageWorngPW(1) << "회 틀림)" << endl << endl;
+				return;
+			}
+			accArr[i]->ChageWorngPW(0);
 			if(!accArr[i]->GetStatus()){
 				cout << "정지된 계좌입니다." << endl << endl;
 				return;
