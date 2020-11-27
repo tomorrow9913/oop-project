@@ -17,7 +17,7 @@ class DealList
 private:
 	int balance;			//잔액
 	int money;				//이체 금액
-	int date, month, year;	//일,월,연도
+	string timestamp;		//일,월,연도
 	string addressID;		//이체 대상 아이디
 	string message;			//메세지 
 
@@ -25,5 +25,5 @@ public:
 	DealList();
 	DealList(int balance, int money, string addresseID, string message);
 	DealList& getInfo();
-	void setInfo(int balance, int money, int year, int month, int date, string addresseID, string message);	
+	void setInfo(int balance, int money, string timestamp, string addresseID, string message);
 };

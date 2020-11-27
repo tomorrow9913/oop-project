@@ -20,26 +20,24 @@ using namespace std;
 * Author: Jeong MinGyu
 **/
 DealList::DealList(int balance, int money, string addressID, string message) {
+    char date[100] = { 0 };
     time_t timer = time(NULL);
     struct tm tm_info;
     localtime_s(&tm_info, &timer);
 
     this->balance = balance;
     this->money = money;
-    this->year = tm_info.tm_year + 1900;
-    this->month = tm_info.tm_mon;
-    this->date = tm_info.tm_mday;
+    strftime(date, sizeof(date), "%Y-%m-%d %H:%M:%S", &tm_info);
+    this->timestamp = date;
 
     this->addressID = addressID;
     this->message = message;
 }
 
 DealList::DealList() {
-    this->balance = 1900;
+    this->balance = 0;
     this->money = -1;
-    this->year = 1;
-    this->month = 1;
-    this->date = 1;
+    this->timestamp = "";
 
     this->addressID = "";
     this->message = "";
@@ -53,12 +51,11 @@ DealList::DealList() {
 *
 * Author: Jeong MinGyu
 **/
-void DealList::setInfo(int balance, int money, int year, int month, int date, string addresseID, string message) {
+void DealList::setInfo(int balance, int money, string timestamp, string addresseID, string message) {
     this->balance = balance;
     this->money = money;
-    this->year = year;
-    this->month = month;
-    this->date = date;
+    this->timestamp = timestamp;
+
 
     this->addressID = addresseID;
     this->message = message;
@@ -87,6 +84,6 @@ DealList& DealList::getInfo() {
 ostream& operator<<(ostream& os, const DealList& dl)
 {
     os << "=============================" << endl;
-    os << dl.year << "/" << dl.month << "/" << dl.date << "\t" << dl.addressID << "\t" << dl.message << "\t" << dl.money << "\t" << dl.balance << endl;
+    os << dl.timestamp << "\t" << dl.addressID << "\t" << dl.message << "\t" << dl.money << "\t" << dl.balance << endl;
     return os;
 }
