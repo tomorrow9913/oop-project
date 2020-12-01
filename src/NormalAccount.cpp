@@ -8,13 +8,13 @@
 
 NormalAccount::NormalAccount() :Account(0, 0, NULL) {
 	this->addInterestRate = 0.01;
-	this->typeCheck = "NormalAccount";
+	this->typeCheck = "Normal";
 };
 
 NormalAccount::NormalAccount(int ID, int money, char* name) :Account(ID, money, name) {
 	this->addInterestRate = 0.01;
-	this->typeCheck = "NormalAccount"; //추가
-	this->interestRateCheck = addInterestRate; //추가
+	this->typeCheck = "Normal";
+	this->interestRateCheck = addInterestRate; 
 }
 
 NormalAccount::NormalAccount(const NormalAccount& ref)

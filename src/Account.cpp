@@ -11,8 +11,10 @@
 #include <queue>
 #include <stack>
 #include <string>
+#include <iomanip>
 #include "Account.h"
 #include "DealList.h"
+#include "DesignSet.h"
 
 using namespace std;
 
@@ -35,6 +37,10 @@ Account::Account(int ID, int money, char* name)
 	AddDealList(money, money, "계좌개설", "-");
 	cusName = new char[strlen(name) + 1];
 	strcpy_s(cusName, (strlen(name) + 1), name);
+
+	system("cls");
+	changeColor(lightGreen); cout << "알림"; changeColor(darkWhite);
+	cout << " : 계좌 개설 완료";
 }
 
 Account::Account(const Account& ref)
@@ -70,9 +76,10 @@ void Account::Deposit(int money)
 	if(interest) AddDealList(balance, interest, "예금이자", "-");
 	
 	string msg;
-	cout << "입금 메시지 : ";
-	cin >> msg;
-	
+	cout << "\t\t\t\t\t입금 메시지 : "; changeColor(lightGreen);
+	cin >> msg; changeColor(darkWhite);
+
+	system("cls");
 	balance += money;
 	if (money) AddDealList(balance, money, "현금 입금", msg);
 }
@@ -123,15 +130,18 @@ int Account::Withdraw(int money)
 **/
 void Account::ShowAccInfo() const
 {
-	cout << "계좌ID: " << accID << endl;
-	cout << "이  름: " << cusName << endl;
-	cout << "잔  액: " << balance << endl;
-	cout << "계좌 정보: " << typeCheck << endl;
-	if (typeCheck == "HighCreditAccount") {
-		cout << "등급: " << checkGrade << endl;
-	}
-	cout << "이자:" << interestRateCheck << endl;
-	cout << "활성화 여부:" << activation << endl;
+	cout << " " << left << setw(15)
+		<< accID << left << setw(15)
+		<< cusName << left << setw(15) 
+		<< balance << left << setw(15)
+		<< typeCheck << left << setw(15);
+	if (typeCheck == "HighCredit") cout << checkGrade << left << setw(15);
+	else cout << "X" << left << setw(15);
+	cout << interestRateCheck << left << setw(15);
+	if (activation) { changeColor(lightBlue); cout << "계좌 활성화"<< endl; }
+	else { changeColor(lightRed); cout << "계좌 정지"<< endl; }
+
+	changeColor(darkWhite);
 }
 
 /**
@@ -151,8 +161,7 @@ void Account::PrintDealList() const {
 		sortRecent.push(copy.front());
 		copy.pop();
 	}
-	cout << "일시\t\t\t거래내용\t메시지\t변동금액\t잔액" << endl;
-	cout << "=============================" << endl;
+
 	while(sortRecent.size()){
 		cout << *(sortRecent.top());
 		sortRecent.pop();
@@ -192,15 +201,15 @@ Account::~Account()
 int Account::Transfer(int money, Account& accAccount) {//받는 계좌
 	int fee;
 	string msg;
-	
+
 	if (this->balance >= SET_A) fee = 100;
 	else if (this->balance < SET_A && this->balance >= SET_B) fee = 300;
 	else if (this->balance < SET_B && this->balance > SET_C) fee = 500;
 	else fee = 700;
 
 	if (this->balance >= fee + money) {
-		cout << "메시지를 입력하시오." << endl;
-		cin >> msg;
+		cout << "\t\t\t\t\t메시지 입력 : "; changeColor(lightGreen);
+		cin >> msg; changeColor(darkWhite);
 
 		balance -= money;
 		this->AddDealList(this->getBalance(), -money, this->cusName, msg);
@@ -213,7 +222,9 @@ int Account::Transfer(int money, Account& accAccount) {//받는 계좌
 		return money;
 	}
 	else {
-		cout << "잔액이 부족합니다." << endl;
+		system("cls");
+		changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+		cout << " : 잔액이 부족합니다.";
 		return ERR_LACK;
 	}	
 }
@@ -289,15 +300,17 @@ void Account::SetPW(string PW) {
 string Account::InputPw() {
 	fflush(stdin);
 	string tmp;
-	cout << "비밀번호 입력: ____\b\b\b\b";
+
+	cout << "\t\t\t\t\t비밀번호 입력: ____\b\b\b\b";
 	for (int i = 0; i < 4; i++)
 	{
+		changeColor(lightGreen);
 		tmp += _getch();
 		cout << "*";
+		changeColor(darkWhite);
 	}
 	fflush(stdin);
 	cout << endl;
-
 	return tmp;
 }
 

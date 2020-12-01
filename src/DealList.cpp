@@ -8,6 +8,7 @@
 #include <iostream>
 #include <time.h>
 #include "DealList.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -83,7 +84,11 @@ DealList& DealList::getInfo() {
 **/
 ostream& operator<<(ostream& os, const DealList& dl)
 {
-    os << dl.timestamp << "\t" << dl.addressID << "\t" << dl.message << "\t" << dl.money << "\t" << dl.balance << endl;
-    os << "=============================" << endl;
+    os << " " << left << setw(25)
+       << dl.timestamp << left << setw(15) 
+       << dl.addressID << left << setw(25)
+       << dl.message << left << setw(15)
+       << dl.money << left << setw(15)
+       << dl.balance << endl;
     return os;
 }

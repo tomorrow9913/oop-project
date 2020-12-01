@@ -6,7 +6,6 @@
  **/
 #include "HighCreditAccount.h"
 
-
 double HighCreditAccount::interestRate[4] = { 0.07, 0.05, 0.03, 0 };
 
 HighCreditAccount::HighCreditAccount() :Account(0, 0, NULL) {
@@ -15,7 +14,7 @@ HighCreditAccount::HighCreditAccount() :Account(0, 0, NULL) {
 	this->cusName = 0;
 	this->grade = 0;
 	this->addInterestRate = 0;
-	this->typeCheck = "HighCreditAccount";
+	this->typeCheck = "HighCredit";
 	this->interestRateCheck = addInterestRate;
 };
 
@@ -27,24 +26,29 @@ HighCreditAccount::HighCreditAccount(int ID, int money, char* name) :Account(ID,
 	if (this->balance >= SET_A) {
 		this->grade = 1;
 		this->addInterestRate = interestRate[this->grade - 1];
-		this->checkGrade = "A등급";
+
+		checkGrade = new char[strlen("A등급") + 1];
+		strcpy_s(checkGrade, strlen("A등급") + 1,"A등급");
 	}
 	else if (this->balance >= SET_B) {
 		this->grade = 2;
 		this->addInterestRate = interestRate[this->grade - 1];
-		this->checkGrade = "B등급";
+		checkGrade = new char[strlen("B등급") + 1];
+		strcpy_s(checkGrade, strlen("B등급") + 1, "B등급");
 	}
 	else if (this->balance >= SET_C) {
 		this->grade = 3;
 		this->addInterestRate = interestRate[this->grade - 1];
-		this->checkGrade = "C등급";
+		checkGrade = new char[strlen("C등급") + 1];
+		strcpy_s(checkGrade, strlen("C등급") + 1, "C등급");
 	}
 	else {
 		this->grade = 4;
 		this->addInterestRate = interestRate[this->grade - 1];
-
+		checkGrade = new char[strlen("등급없음") + 1];
+		strcpy_s(checkGrade, strlen("등급없음") + 1, "등급없음");
 	}
-	this->typeCheck = "HighCreditAccount";
+	this->typeCheck = "HighCredit";
 	this->interestRateCheck = addInterestRate;
 }
 

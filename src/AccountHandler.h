@@ -22,5 +22,6 @@ public:
 	void WithdrawMoney(void);
 	void AccountSuspension(void);
 	void ShowAllAccInfo(void) const;
+	void ShowTransactHistory(void) const;
 	~AccountHandler();
 };

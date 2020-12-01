@@ -9,6 +9,8 @@
 #include "AccountHandler.h"
 #include "HighCreditAccount.h"
 #include "NormalAccount.h"
+#include "DesignSet.h"
+#include <iomanip>
 
 using namespace std;
 /**
@@ -17,18 +19,22 @@ using namespace std;
 * @param: void
 * @return: void
 *
-* Author: -
+* Author: - 황진주
 **/
 void AccountHandler::ShowMenu(void) const
 {
-	cout << "-----Menu------" << endl;
-	cout << "1. 계좌개설" << endl;
-	cout << "2. 입    금" << endl;
-	cout << "3. 출    금" << endl;
-	cout << "4. 송    금" << endl;
-	cout << "5. 계좌정보 전체 출력" << endl;
-	cout << "6. 계좌정지" << endl;
-	cout << "7. 프로그램 종료" << endl;
+	printLogo();
+	cout << endl;
+	cout << "\t\t    반갑습니다. 국민의 최소한의 이득을 위한 은행 Min Bank입니다." << endl;
+	cout << "\t\t\t\t 진행할 "; changeColor(yellow);  cout << "업무의 번호"; changeColor(darkWhite); cout << "를 입력해주세요.\n" << endl;
+	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+  " << endl;
+	cout << "\t|   1. 계좌개설     |  |     2. 입 금     |  |     3. 출 금     |  |     4. 송 금     |  " << endl;
+	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+  " << endl;
+	cout << endl;
+	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+" << endl;
+	cout << "\t| 5. 전체 계좌 출력 |  |   6. 계좌 이력   |  |   7. 계좌 정지   |  |     8. 종 료     |" << endl;
+	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+" << endl;
+	cout << endl;
 }
 
 /**
@@ -46,20 +52,29 @@ void AccountHandler::MakeAccount(void)
 	char name[NAME_LEN];
 	int balance;
 
-	cout << "[계좌개설]" << endl;
-	cout << "\t1. 입출금계좌(NormalAccount)" << endl;
-	cout << "\t2. 신용계좌(HighCreditAccount)" << endl;
-	cout << "계좌 항목 선택 : "; cin >> type; cout << endl;
+	string content = "계좌개설";
+	printContent(content);
+	printAccontMenu(0);
+	cout << "\n\t\t\t\t\t계좌 유형 선택 : "; cin >> type; cout << endl;
+	system("cls");
 rewrite:
-	cout << "계좌ID: ";	cin >> id;
-	cout << "이  름: ";	cin >> name;
-	cout << "입금액: ";	cin >> balance;
+	printContent(content);
+	printAccontMenu(type);
+
+	changeColor(darkWhite);
+	cout << "\n";
+	cout << "\t\t\t\t\t계좌 유형 선택 : "; changeColor(lightGreen); cout << type << endl; changeColor(darkWhite);
+	cout << "\t\t\t\t\t계좌ID: "; changeColor(lightGreen); cin >> id;  changeColor(darkWhite);
+	cout << "\t\t\t\t\t이  름: "; changeColor(lightGreen); cin >> name; changeColor(darkWhite);
+	cout << "\t\t\t\t\t입금액: "; changeColor(lightGreen); cin >> balance; changeColor(darkWhite);
 	cout << endl;
 	
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id) {
-			cout << "동일 계좌ID가 있습니다." << endl;
+			system("cls"); changeColor(lightRed);
+			cout << "경고"; changeColor(darkWhite);
+			cout << " : 동일 계좌ID가 이미 존재합니다.";
 			goto rewrite;
 		}
 	}
@@ -84,24 +99,31 @@ void AccountHandler::DepositMoney(void)
 {
 	int money;
 	int id;
-	cout << "[입    금]" << endl;
-	cout << "계좌ID: ";	cin >> id;
-	cout << "입금액: ";	cin >> money;
+	string content = "입 금";
+	printContent(content);
+	cout << "\t\t\t\t\t계좌ID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
+	cout << "\t\t\t\t\t입금액: "; changeColor(lightGreen); cin >> money; changeColor(darkWhite);
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if(!accArr[i]->GetStatus()){
-			cout << "정지된 계좌입니다." << endl << endl;
+			system("cls");
+			changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+			cout << " : 정지된 계좌입니다.";
 			return;
 		}
 		if (accArr[i]->GetAccID() == id)
 		{
 			accArr[i]->Deposit(money);
-			cout << "입금완료" << endl << endl;
+			system("cls");
+			changeColor(lightGreen); cout << "알림"; changeColor(darkWhite);
+			cout << " : 입금완료";
 			return;
 		}
 	}
-	cout << "유효하지 않은 ID 입니다." << endl << endl;
+	system("cls");
+	changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+	cout << " : 유효하지 않은 ID 입니다.";
 }
 
 /**
@@ -117,36 +139,49 @@ void AccountHandler::WithdrawMoney(void)
 	int money;
 	int id;
 
-	cout << "[출    금]" << endl;
-	cout << "계좌ID: ";	cin >> id;
-	cout << "출금액: ";	cin >> money;
+	string content = "출 금";
+	printContent(content);
+	cout << "\t\t\t\t\t계좌ID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
+	cout << "\t\t\t\t\t출금액: "; changeColor(lightGreen); cin >> money; changeColor(darkWhite);
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
 			if(!accArr[i]->GetStatus()){
-				cout << "정지된 계좌입니다." << endl << endl;
+				system("cls");
+				changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+				cout << " : 정지된 계좌입니다.";
 				return;
 			}
 			//TODO 비번 틀린거 횟수 조절하는 함수 기호 상수로 바꿔주세요
 			if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
-				cout << "비밀번호가 다릅니다.";
-				cout << "(" << accArr[i]->ChageWorngPW(1) << "회 틀림)" << endl << endl;
+				system("cls");
+				changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+
+				cout << " : 비밀번호가 다릅니다.";
+				cout << "("; changeColor(lightRed);
+				cout << accArr[i]->ChageWorngPW(1); changeColor(darkWhite);
+				cout << "회 틀림)";
 				return;
 			}
 			else accArr[i]->ChageWorngPW(0);
 			if (accArr[i]->Withdraw(money) < 0)
 			{
-				cout << "잔액부족" << endl << endl;
+				system("cls");
+				changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+				cout << " : 잔액이 부족합니다." << endl << endl;
 				return;
 			}
-
-			cout << "출금완료" << endl << endl;
+			system("cls");
+			changeColor(lightGreen); cout << "알림"; changeColor(darkWhite);
+			cout << " : 출금완료";
 			return;
 		}
 	}
-	cout << "유효하지 않은 ID 입니다." << endl << endl;
+	system("cls");
+	changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+	cout << " : 유효하지 않은 ID 입니다.";
 }
 
 /**
@@ -161,29 +196,39 @@ void AccountHandler::TransferMoney(void) {
 	int money;
 	int id, accid;
 
-	cout << "[송    금]" << endl;
-	cout << "내 계좌ID: ";	cin >> id;
+	string content = "송 금";
+	printContent(content);
+	cout << "\t\t\t\t\t내 계좌ID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
 	
 	do {
-		cout << "받을 계좌ID: "; cin >> accid;
-		if (id != accid) break;
-		cout << "같은ID로 송금할 수 없습니다." << endl;
+		cout << "\t\t\t\t\t받을 계좌ID: "; changeColor(lightGreen); cin >> accid;  changeColor(darkWhite);
+		if (id != accid) break; {
+			changeColor(lightRed); cout << "\t\t\t\t경고"; changeColor(darkWhite);
+			cout << " : 같은ID로 송금할 수 없습니다.\n" << endl;
+		}
 	} while (id == accid);
 
-	cout << "송금액 ";	cin >> money;
+	cout << "\t\t\t\t\t송금액: "; changeColor(lightGreen); cin >> money; changeColor(darkWhite);
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
 			//TODO 비번 틀린거 횟수 조절하는 함수 기호 상수로 바꿔주세요
 			if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
-				cout << "비밀번호가 다릅니다.";
-				cout << "(" << accArr[i]->ChageWorngPW(1) << "회 틀림)" << endl << endl;
+				system("cls");
+				changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+
+				cout << " : 비밀번호가 다릅니다.";
+				cout << "("; changeColor(lightRed);
+				cout << accArr[i]->ChageWorngPW(1); changeColor(darkWhite);
+				cout << "회 틀림)";
 				return;
 			}
 			else accArr[i]->ChageWorngPW(0);
 			if(!accArr[i]->GetStatus()){
-				cout << "정지된 계좌입니다." << endl << endl;
+				system("cls");
+				changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+				cout << " : 정지된 계좌입니다.";
 				return;
 			}
 			for (int j = 0; j < accNum; j++)
@@ -191,22 +236,33 @@ void AccountHandler::TransferMoney(void) {
 				if (accArr[j]->GetAccID() == accid)
 				{
 					if(!accArr[i]->GetStatus()){
-						cout << "정지된 계좌입니다." << endl << endl;
+						system("cls");
+						changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+						cout << " : 정지된 계좌입니다.";
 						return;
 					}
-					if (int returnMoney = accArr[i]->Transfer(money, *accArr[j]) > 0) {
-						cout << "송금완료" << endl << endl;
+							
+					if (accArr[i]->Transfer(money, *accArr[j]) > 0) { 
+						system("cls");
+						changeColor(lightGreen); cout << "알림"; changeColor(darkWhite);
+						cout << " : 송금완료";
 						return;
 					}
-					cout << "잔액부족" << endl << endl;
+					system("cls");
+					changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+					cout << " : 잔액이 부족합니다.";
 					return;
 				}
 			}
-			cout << "유효하지 않은 ID 입니다." << endl << endl;
+			system("cls");
+			changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+			cout << " : 유효하지 않은 ID 입니다.";
 			return;
 		}
 	}
-	cout << "유효하지 않은 ID 입니다." << endl << endl;
+	system("cls");
+	changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+	cout << " : 유효하지 않은 ID 입니다.";
 }
 
 /**
@@ -219,12 +275,53 @@ void AccountHandler::TransferMoney(void) {
 **/
 void AccountHandler::ShowAllAccInfo(void) const
 {
+	printContent("전체 계좌");
+	cout << " " << left << setw(15)
+		<< "계좌ID" << left << setw(15)
+		<< "이  름" << left << setw(15)
+		<< "잔  액" << left << setw(15)
+		<< "계좌 정보" << left << setw(15)
+		<< "등  급" << left << setw(15)
+		<< "이  자" << left << setw(15)
+		<< "계좌 활성" << left << setw(15);
+	cout << endl;
+	cout << " ---------------------------------------------------------------------------------------------------" << endl;
 	for (int i = 0; i < accNum; i++)
 	{
 		accArr[i]->ShowAccInfo();
 		cout << endl;
-		accArr[i]->PrintDealList();
+		//accArr[i]->PrintDealList();
 	}
+	cout << "\n\n >> 키 입력시 메인 화면으로 돌아갑니다....";
+	cin.ignore(50, '\n');
+	cin.get();
+}
+
+void AccountHandler::ShowTransactHistory(void) const
+{
+	printContent("거래 이력");
+	for (int i = 0; i < accNum; i++)
+	{
+		changeColor(lightGreen);
+		cout << accArr[i]->GetAccID(); changeColor(darkWhite);
+		cout << " 님의 거래내역 입니다.\n\n";
+		
+		cout << " " << left << setw(25)
+			<< "일  시" << left << setw(15)
+			<< "거래 내용" << left << setw(25)
+			<< "메시지" << left << setw(15)
+			<< "변동 금액" << left << setw(15)
+			<< "잔  액";
+		cout << endl;
+
+		cout << " ===================================================================================================" << endl;
+		accArr[i]->PrintDealList();
+		cout << endl;
+		cout << " ===================================================================================================" << endl << endl << endl;
+	}
+	cout << "\n\n >> 키 입력시 메인 화면으로 돌아갑니다....";
+	cin.ignore(50, '\n');
+	cin.get();
 }
 
 /**
@@ -237,27 +334,40 @@ void AccountHandler::ShowAllAccInfo(void) const
 **/
 void AccountHandler::AccountSuspension(void) {
 	int id, answer = 0;
-	cout << "[계좌 정지]" << endl;
-	cout << "계좌ID: ";	cin >> id;
+	string content = "계좌 정지";
+	printContent(content);
+	cout << "\t\t\t\t\t\t 계좌ID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
+	cout << endl;
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
 			do{
-				cout << "계좌 활성화 여부를 변경하시겠습니까?"<< endl;
-				cout << "현재 계좌 상태 : " << accArr[i]->GetStatus() << endl;
-				cout << "1. 변경" << endl;
-				cout << "2. 취소" << endl;
+				cout << "\t\t\t\t    계좌 활성화 여부를 변경하시겠습니까?\n\n"<< endl;
+				cout << "\t\t\t\t\t현재 계좌 상태 : ";
+				if (accArr[i]->GetStatus()) {
+					changeColor(lightBlue); cout << "계좌 활성화"; changeColor(darkWhite);
+				}
+				else {
+					changeColor(lightRed); cout << "계좌 정지"; changeColor(darkWhite);
+				}
+				cout << endl << endl;;
+				printSuspension(0);
 
-				cin >> answer;
+
+				cout << "\n\n\t\t\t\t\t\t- 선택: "; changeColor(lightGreen);
+				cin >> answer;  changeColor(darkWhite);
 
 				switch(answer){
 				case 1:
 					accArr[i]->ToggleStatus();
+					system("cls");
 				case 2:
+					system("cls");
 					return;
 				default:
+					system("cls");
 					break;
 				} 
 			} while (1);
@@ -265,8 +375,9 @@ void AccountHandler::AccountSuspension(void) {
 			return;
 		}
 	}
-	cout << "유효하지 않은 ID 입니다." << endl << endl;
-
+	system("cls");
+	changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+	cout << " : 유효하지 않은 ID 입니다.";
 }
 
 AccountHandler::AccountHandler() : accNum(0)

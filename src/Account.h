@@ -22,10 +22,10 @@ protected:
 	int wrongCnt;
 	bool activation;
 	char* cusName;
+	char* checkGrade;
 	double interestRate; 
 	double interestRateCheck;
 	const char* typeCheck;	
-	const char* checkGrade;
 	string pass;
 	queue<DealList*> dealList;// 최근 거래 내역
 public:
