@@ -235,10 +235,10 @@ void AccountHandler::TransferMoney(void) {
 			{
 				if (accArr[j]->GetAccID() == accid)
 				{
-					if(!accArr[i]->GetStatus()){
+					if(!accArr[j]->GetStatus()){
 						system("cls");
 						changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
-						cout << " : 정지된 계좌입니다.";
+						cout << " : 이체 상대가 정지된 계좌입니다.";
 						return;
 					}
 							
@@ -361,6 +361,20 @@ void AccountHandler::AccountSuspension(void) {
 
 				switch(answer){
 				case 1:
+					if(!accArr[i]->GetStatus()) {
+					//TODO 비번 틀린거 횟수 조절하는 함수 기호 상수로 바꿔주세요
+					if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
+						system("cls");
+						changeColor(lightRed); cout << "경고"; changeColor(darkWhite);
+
+						cout << " : 비밀번호가 다릅니다.";
+						cout << "("; changeColor(lightRed);
+						cout << accArr[i]->ChageWorngPW(1); changeColor(darkWhite);
+						cout << "회 틀림)";
+						return;
+					}
+					else accArr[i]->ChageWorngPW(0);
+					}
 					accArr[i]->ToggleStatus();
 					system("cls");
 				case 2:

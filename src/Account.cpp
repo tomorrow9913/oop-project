@@ -326,7 +326,7 @@ int Account::ChageWorngPW(bool mode) {
 	if (mode) {
 		++(this->wrongCnt);
 		//TODO 아래 3회 횟수 고정해둔거 기호 상수로 빼주세요.
-		if (this->wrongCnt > 3 && this->GetStatus()) {
+		if (this->wrongCnt >= 3 && this->GetStatus()) {
 			this->ToggleStatus();
 		}
 		return this->wrongCnt;
