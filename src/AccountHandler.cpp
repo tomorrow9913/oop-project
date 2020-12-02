@@ -1,8 +1,8 @@
-/**
+ï»¿/**
  * File Name: AccountHandler.cpp
  *
  * Description:
- * AccountHandler Å¬·¡½º Á¤ÀÇ ÆÄÀÏ
+ * AccountHandler í´ë˜ìŠ¤ ì •ì˜ íŒŒì¼
  **/
 
 #include <iostream>
@@ -15,66 +15,83 @@
 using namespace std;
 /**
 * Function Name: ShowMenu
-* Description: ¸ŞÀÎ ¸Ş´º¸¦ Ãâ·ÂÇÑ´Ù.
+* Description: ë©”ì¸ ë©”ë‰´ë¥¼ ì¶œë ¥í•œë‹¤.
 * @param: void
 * @return: void
 *
-* Author: - È²ÁøÁÖ
+* Author: - í™©ì§„ì£¼
 **/
 void AccountHandler::ShowMenu(void) const
 {
 	printLogo();
 	cout << endl;
-	cout << "\t\t    ¹İ°©½À´Ï´Ù. ±¹¹ÎÀÇ ÃÖ¼ÒÇÑÀÇ ÀÌµæÀ» À§ÇÑ ÀºÇà Min BankÀÔ´Ï´Ù." << endl;
-	cout << "\t\t\t\t ÁøÇàÇÒ "; changeColor(yellow);  cout << "¾÷¹«ÀÇ ¹øÈ£"; changeColor(darkWhite); cout << "¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.\n" << endl;
+	cout << "\t\t    ë°˜ê°‘ìŠµë‹ˆë‹¤. êµ­ë¯¼ì˜ ìµœì†Œí•œì˜ ì´ë“ì„ ìœ„í•œ ì€í–‰ Min Bankì…ë‹ˆë‹¤." << endl;
+	cout << "\t\t\t\t ì§„í–‰í•  "; changeColor(yellow);  cout << "ì—…ë¬´ì˜ ë²ˆí˜¸"; changeColor(darkWhite); cout << "ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.\n" << endl;
 	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+  " << endl;
-	cout << "\t|   1. °èÁÂ°³¼³     |  |     2. ÀÔ ±İ     |  |     3. Ãâ ±İ     |  |     4. ¼Û ±İ     |  " << endl;
+	cout << "\t|   1. ê³„ì¢Œê°œì„¤     |  |     2. ì… ê¸ˆ     |  |     3. ì¶œ ê¸ˆ     |  |     4. ì†¡ ê¸ˆ     |  " << endl;
 	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+  " << endl;
 	cout << endl;
 	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+" << endl;
-	cout << "\t| 5. ÀüÃ¼ °èÁÂ Ãâ·Â |  |   6. °èÁÂ ÀÌ·Â   |  |   7. °èÁÂ Á¤Áö   |  |     8. Á¾ ·á     |" << endl;
+	cout << "\t| 5. ì „ì²´ ê³„ì¢Œ ì¶œë ¥ |  |   6. ê³„ì¢Œ ì´ë ¥   |  |   7. ê³„ì¢Œ ì •ì§€   |  |     8. ì¢… ë£Œ     |" << endl;
 	cout << "\t+-------------------+  +------------------+  +------------------+  +------------------+" << endl;
 	cout << endl;
 }
 
 /**
 * Function Name: MakeAccount
-* Description: °èÁÂ °³¼³.
+* Description: ê³„ì¢Œ ê°œì„¤.
 * @param: void
 * @return: void
 *
-* Author: - ³²À¯Á¤, ¹ÚÁÖ¿ë
+* Author: - ë‚¨ìœ ì •, ë°•ì£¼ìš©
 **/
 void AccountHandler::MakeAccount(void)
 {
+	string input;
 	int id;
 	int type;
 	char name[NAME_LEN];
 	int balance;
 
-	string content = "°èÁÂ°³¼³";
-	printContent(content);
-	printAccontMenu(0);
-	cout << "\n\t\t\t\t\t°èÁÂ À¯Çü ¼±ÅÃ : "; cin >> type; cout << endl;
-	system("cls");
-rewrite:
+	string content = "ê³„ì¢Œê°œì„¤";
+	while (1) {
+		printContent(content);
+		printAccontMenu(0);
+		cout << "\n\t\t\t\t\tê³„ì¢Œ ìœ í˜• ì„ íƒ : "; cin >> input; cout << endl;
+		type = atoi(input.c_str());
+		system("cls");
+		if (type <= 0 || type > 2) continue;
+		break;
+	}
 	printContent(content);
 	printAccontMenu(type);
-
+rewrite:
 	changeColor(darkWhite);
 	cout << "\n";
-	cout << "\t\t\t\t\t°èÁÂ À¯Çü ¼±ÅÃ : "; changeColor(lightGreen); cout << type << endl; changeColor(darkWhite);
-	cout << "\t\t\t\t\t°èÁÂID: "; changeColor(lightGreen); cin >> id;  changeColor(darkWhite);
-	cout << "\t\t\t\t\tÀÌ  ¸§: "; changeColor(lightGreen); cin >> name; changeColor(darkWhite);
-	cout << "\t\t\t\t\tÀÔ±İ¾×: "; changeColor(lightGreen); cin >> balance; changeColor(darkWhite);
+	cout << "\t\t\t\t\tê³„ì¢Œ ìœ í˜• ì„ íƒ : "; changeColor(lightGreen); cout << type << endl; changeColor(darkWhite);
+
+	cout << "\t\t\t\t\tê³„ì¢ŒID: "; changeColor(lightGreen); cin >> input;  changeColor(darkWhite);
+	id = atoi(input.c_str());
+	if (id <= 0) goto rewrite;
+	cout << "\t\t\t\t\tì´  ë¦„: "; changeColor(lightGreen); cin >> name; changeColor(darkWhite);
+	cout << "\t\t\t\t\tì…ê¸ˆì•¡: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+	balance = atoi(input.c_str());
+	if(balance < 0) goto rewrite;
 	cout << endl;
 	
+	if (id < 0) {
+		system("cls"); changeColor(lightRed);
+		cout << "ê²½ê³ "; changeColor(darkWhite); 
+		cout << " : ê³„ì¢Œ ë²ˆí˜¸ë¥¼ ìŒìˆ˜ë¡œ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.";
+		goto rewrite;
+	}
+
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id) {
 			system("cls"); changeColor(lightRed);
-			cout << "°æ°í"; changeColor(darkWhite);
-			cout << " : µ¿ÀÏ °èÁÂID°¡ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.";
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ë™ì¼ ê³„ì¢ŒIDê°€ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.";
 			goto rewrite;
 		}
 	}
@@ -89,7 +106,7 @@ rewrite:
 
 /**
 * Function Name: DepositMoney
-* Description: ÀÔ±İ.
+* Description: ì…ê¸ˆ.
 * @param: void
 * @return: void
 *
@@ -97,52 +114,98 @@ rewrite:
 **/
 void AccountHandler::DepositMoney(void)
 {
+	string input;
 	int money;
 	int id;
-	string content = "ÀÔ ±İ";
-	printContent(content);
-	cout << "\t\t\t\t\t°èÁÂID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
-	cout << "\t\t\t\t\tÀÔ±İ¾×: "; changeColor(lightGreen); cin >> money; changeColor(darkWhite);
+	string content = "ì… ê¸ˆ";
+	while (1)
+	{
+		printContent(content);
+		cout << "\t\t\t\t\tê³„ì¢ŒID: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+		id = atoi(input.c_str());
+		if (id <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+
+			continue;
+		}
+
+		cout << "\t\t\t\t\tì…ê¸ˆì•¡: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+		money = atoi(input.c_str());
+
+		if (money <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+			
+			continue;
+		}
+		break;
+	}
+	
 
 	for (int i = 0; i < accNum; i++)
 	{
 		if(!accArr[i]->GetStatus()){
 			system("cls");
-			changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-			cout << " : Á¤ÁöµÈ °èÁÂÀÔ´Ï´Ù.";
+			changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì •ì§€ëœ ê³„ì¢Œì…ë‹ˆë‹¤.";
 			return;
 		}
 		if (accArr[i]->GetAccID() == id)
 		{
 			accArr[i]->Deposit(money);
 			system("cls");
-			changeColor(lightGreen); cout << "¾Ë¸²"; changeColor(darkWhite);
-			cout << " : ÀÔ±İ¿Ï·á";
+			changeColor(lightGreen); cout << "ì•Œë¦¼"; changeColor(darkWhite);
+			cout << " : ì…ê¸ˆì™„ë£Œ";
 			return;
 		}
 	}
 	system("cls");
-	changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-	cout << " : À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù.";
+	changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+	cout << " : ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤.";
 }
 
 /**
 * Function Name: WithdrawMoney
-* Description: Ãâ±İ.
+* Description: ì¶œê¸ˆ.
 * @param: void
 * @return: void
 *
 * Author: -
 **/
 void AccountHandler::WithdrawMoney(void)
-{ 
+{
+	string input;
 	int money;
 	int id;
 
-	string content = "Ãâ ±İ";
-	printContent(content);
-	cout << "\t\t\t\t\t°èÁÂID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
-	cout << "\t\t\t\t\tÃâ±İ¾×: "; changeColor(lightGreen); cin >> money; changeColor(darkWhite);
+	string content = "ì¶œ ê¸ˆ";
+	while (1)
+	{
+		printContent(content);
+		cout << "\t\t\t\t\tê³„ì¢ŒID: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+		id = atoi(input.c_str());
+		if (id <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+
+			continue;
+		}
+		cout << "\t\t\t\t\tì¶œê¸ˆì•¡: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+		money = atoi(input.c_str());
+		if (money <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+
+			continue;
+		}
+		break;
+	}
+	
 
 	for (int i = 0; i < accNum; i++)
 	{
@@ -150,85 +213,118 @@ void AccountHandler::WithdrawMoney(void)
 		{
 			if(!accArr[i]->GetStatus()){
 				system("cls");
-				changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-				cout << " : Á¤ÁöµÈ °èÁÂÀÔ´Ï´Ù.";
+				changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+				cout << " : ì •ì§€ëœ ê³„ì¢Œì…ë‹ˆë‹¤.";
 				return;
 			}
-			//TODO ºñ¹ø Æ²¸°°Å È½¼ö Á¶ÀıÇÏ´Â ÇÔ¼ö ±âÈ£ »ó¼ö·Î ¹Ù²ãÁÖ¼¼¿ä
+			//TODO ë¹„ë²ˆ í‹€ë¦°ê±° íšŸìˆ˜ ì¡°ì ˆí•˜ëŠ” í•¨ìˆ˜ ê¸°í˜¸ ìƒìˆ˜ë¡œ ë°”ê¿”ì£¼ì„¸ìš”
 			if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
 				system("cls");
-				changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
+				changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
 
-				cout << " : ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.";
+				cout << " : ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.";
 				cout << "("; changeColor(lightRed);
 				cout << accArr[i]->ChageWorngPW(1); changeColor(darkWhite);
-				cout << "È¸ Æ²¸²)";
+				cout << "íšŒ í‹€ë¦¼)";
 				return;
 			}
 			else accArr[i]->ChageWorngPW(0);
 			if (accArr[i]->Withdraw(money) < 0)
 			{
 				system("cls");
-				changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-				cout << " : ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù." << endl << endl;
+				changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+				cout << " : ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤." << endl << endl;
 				return;
 			}
 			system("cls");
-			changeColor(lightGreen); cout << "¾Ë¸²"; changeColor(darkWhite);
-			cout << " : Ãâ±İ¿Ï·á";
+			changeColor(lightGreen); cout << "ì•Œë¦¼"; changeColor(darkWhite);
+			cout << " : ì¶œê¸ˆì™„ë£Œ";
 			return;
 		}
 	}
 	system("cls");
-	changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-	cout << " : À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù.";
+	changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+	cout << " : ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤.";
 }
 
 /**
 * Function Name:TransferMoney
-* Description: ¼Û±İ
+* Description: ì†¡ê¸ˆ
 * @param: void
 * @return: void
 *
-* Author: - ³²À¯Á¤, ¹ÚÁÖ¿ë
+* Author: - ë‚¨ìœ ì •, ë°•ì£¼ìš©
 **/
 void AccountHandler::TransferMoney(void) {
+	string input;
 	int money;
 	int id, accid;
 
-	string content = "¼Û ±İ";
-	printContent(content);
-	cout << "\t\t\t\t\t³» °èÁÂID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
-	
-	do {
-		cout << "\t\t\t\t\t¹ŞÀ» °èÁÂID: "; changeColor(lightGreen); cin >> accid;  changeColor(darkWhite);
-		if (id != accid) break; {
-			changeColor(lightRed); cout << "\t\t\t\t°æ°í"; changeColor(darkWhite);
-			cout << " : °°ÀºID·Î ¼Û±İÇÒ ¼ö ¾ø½À´Ï´Ù.\n" << endl;
+ 	string content = "ì†¡ ê¸ˆ";
+fstInput:
+	while (1) {
+		printContent(content); 
+		cout << "\t\t\t\t\të‚´ ê³„ì¢ŒID: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+		id = atoi(input.c_str());
+		if (id <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+			continue;
 		}
-	} while (id == accid);
+		break;
+	}
 
-	cout << "\t\t\t\t\t¼Û±İ¾×: "; changeColor(lightGreen); cin >> money; changeColor(darkWhite);
+	while(1) { 
+		cout << "\t\t\t\t\të°›ì„ ê³„ì¢ŒID: "; changeColor(lightGreen); cin >> input;  changeColor(darkWhite);
+		accid = atoi(input.c_str());
+		if (accid <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+			goto fstInput;
+		}
+		
+		if (id == accid)
+		{
+			system("cls");
+			changeColor(lightRed); cout << "\t\t\t\tê²½ê³ "; changeColor(darkWhite);
+			cout << " : ê°™ì€IDë¡œ ì†¡ê¸ˆí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n" << endl;
+			goto fstInput;
+		}
+		break;
+	}
+	while (1) {
+		cout << "\t\t\t\t\tì†¡ê¸ˆì•¡: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+		money = atoi(input.c_str());
+		if (money <= 0) {
+			system("cls"); changeColor(lightRed);
+			cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ì˜¬ë°”ë¥´ì§€ ì•Šì€ ì…ë ¥.";
+			goto fstInput;
+		}
+		break;
+	}
 	for (int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == id)
 		{
-			//TODO ºñ¹ø Æ²¸°°Å È½¼ö Á¶ÀıÇÏ´Â ÇÔ¼ö ±âÈ£ »ó¼ö·Î ¹Ù²ãÁÖ¼¼¿ä
+			//TODO ë¹„ë²ˆ í‹€ë¦°ê±° íšŸìˆ˜ ì¡°ì ˆí•˜ëŠ” í•¨ìˆ˜ ê¸°í˜¸ ìƒìˆ˜ë¡œ ë°”ê¿”ì£¼ì„¸ìš”
 			if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
 				system("cls");
-				changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
+				changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
 
-				cout << " : ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.";
+				cout << " : ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.";
 				cout << "("; changeColor(lightRed);
 				cout << accArr[i]->ChageWorngPW(1); changeColor(darkWhite);
-				cout << "È¸ Æ²¸²)";
+				cout << "íšŒ í‹€ë¦¼)";
 				return;
 			}
 			else accArr[i]->ChageWorngPW(0);
 			if(!accArr[i]->GetStatus()){
 				system("cls");
-				changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-				cout << " : Á¤ÁöµÈ °èÁÂÀÔ´Ï´Ù.";
+				changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+				cout << " : ì •ì§€ëœ ê³„ì¢Œì…ë‹ˆë‹¤.";
 				return;
 			}
 			for (int j = 0; j < accNum; j++)
@@ -237,37 +333,37 @@ void AccountHandler::TransferMoney(void) {
 				{
 					if(!accArr[j]->GetStatus()){
 						system("cls");
-						changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-						cout << " : ÀÌÃ¼ »ó´ë°¡ Á¤ÁöµÈ °èÁÂÀÔ´Ï´Ù.";
+						changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+						cout << " : ì´ì²´ ìƒëŒ€ê°€ ì •ì§€ëœ ê³„ì¢Œì…ë‹ˆë‹¤.";
 						return;
 					}
 							
 					if (accArr[i]->Transfer(money, *accArr[j]) > 0) { 
 						system("cls");
-						changeColor(lightGreen); cout << "¾Ë¸²"; changeColor(darkWhite);
-						cout << " : ¼Û±İ¿Ï·á";
+						changeColor(lightGreen); cout << "ì•Œë¦¼"; changeColor(darkWhite);
+						cout << " : ì†¡ê¸ˆì™„ë£Œ";
 						return;
 					}
 					system("cls");
-					changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-					cout << " : ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù.";
+					changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+					cout << " : ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.";
 					return;
 				}
 			}
 			system("cls");
-			changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-			cout << " : À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù.";
+			changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+			cout << " : ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤.";
 			return;
 		}
 	}
 	system("cls");
-	changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-	cout << " : À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù.";
+	changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+	cout << " : ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤.";
 }
 
 /**
 * Function Name: ShowAllAccInfo
-* Description: ÀüÃ¼ °èÁÂ Ãâ·Â.
+* Description: ì „ì²´ ê³„ì¢Œ ì¶œë ¥.
 * @param: void
 * @return: void
 *
@@ -275,15 +371,15 @@ void AccountHandler::TransferMoney(void) {
 **/
 void AccountHandler::ShowAllAccInfo(void) const
 {
-	printContent("ÀüÃ¼ °èÁÂ");
+	printContent("ì „ì²´ ê³„ì¢Œ");
 	cout << " " << left << setw(15)
-		<< "°èÁÂID" << left << setw(15)
-		<< "ÀÌ  ¸§" << left << setw(15)
-		<< "ÀÜ  ¾×" << left << setw(15)
-		<< "°èÁÂ Á¤º¸" << left << setw(15)
-		<< "µî  ±Ş" << left << setw(15)
-		<< "ÀÌ  ÀÚ" << left << setw(15)
-		<< "°èÁÂ È°¼º" << left << setw(15);
+		<< "ê³„ì¢ŒID" << left << setw(15)
+		<< "ì´  ë¦„" << left << setw(15)
+		<< "ì”  ì•¡" << left << setw(15)
+		<< "ê³„ì¢Œ ì •ë³´" << left << setw(15)
+		<< "ë“±  ê¸‰" << left << setw(15)
+		<< "ì´  ì" << left << setw(15)
+		<< "ê³„ì¢Œ í™œì„±" << left << setw(15);
 	cout << endl;
 	cout << " ---------------------------------------------------------------------------------------------------" << endl;
 	for (int i = 0; i < accNum; i++)
@@ -292,26 +388,27 @@ void AccountHandler::ShowAllAccInfo(void) const
 		cout << endl;
 		//accArr[i]->PrintDealList();
 	}
-	cout << "\n\n >> Å° ÀÔ·Â½Ã ¸ŞÀÎ È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù....";
+	cout << "\n\n >> ì—”í„°í‚¤ ì…ë ¥ì‹œ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤....";
 	cin.ignore(50, '\n');
 	cin.get();
+	cin.clear();
 }
 
 void AccountHandler::ShowTransactHistory(void) const
 {
-	printContent("°Å·¡ ÀÌ·Â");
+	printContent("ê±°ë˜ ì´ë ¥");
 	for (int i = 0; i < accNum; i++)
 	{
 		changeColor(lightGreen);
 		cout << accArr[i]->GetAccID(); changeColor(darkWhite);
-		cout << " ´ÔÀÇ °Å·¡³»¿ª ÀÔ´Ï´Ù.\n\n";
+		cout << " ë‹˜ì˜ ê±°ë˜ë‚´ì—­ ì…ë‹ˆë‹¤.\n\n";
 		
 		cout << " " << left << setw(25)
-			<< "ÀÏ  ½Ã" << left << setw(15)
-			<< "°Å·¡ ³»¿ë" << left << setw(25)
-			<< "¸Ş½ÃÁö" << left << setw(15)
-			<< "º¯µ¿ ±İ¾×" << left << setw(15)
-			<< "ÀÜ  ¾×";
+			<< "ì¼  ì‹œ" << left << setw(15)
+			<< "ê±°ë˜ ë‚´ìš©" << left << setw(25)
+			<< "ë©”ì‹œì§€" << left << setw(15)
+			<< "ë³€ë™ ê¸ˆì•¡" << left << setw(15)
+			<< "ì”  ì•¡";
 		cout << endl;
 
 		cout << " ===================================================================================================" << endl;
@@ -319,14 +416,15 @@ void AccountHandler::ShowTransactHistory(void) const
 		cout << endl;
 		cout << " ===================================================================================================" << endl << endl << endl;
 	}
-	cout << "\n\n >> Å° ÀÔ·Â½Ã ¸ŞÀÎ È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù....";
+	cout << "\n\n >> ì—”í„°í‚¤ ì…ë ¥ì‹œ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤....";
 	cin.ignore(50, '\n');
 	cin.get();
+	cin.clear(); 
 }
 
 /**
 * Function Name: AccountSuspension
-* Description: °èÁÂ Á¤Áö ¼³Á¤.
+* Description: ê³„ì¢Œ ì •ì§€ ì„¤ì •.
 * @param: void
 * @return: void
 *
@@ -334,9 +432,9 @@ void AccountHandler::ShowTransactHistory(void) const
 **/
 void AccountHandler::AccountSuspension(void) {
 	int id, answer = 0;
-	string content = "°èÁÂ Á¤Áö";
+	string content = "ê³„ì¢Œ ì •ì§€";
 	printContent(content);
-	cout << "\t\t\t\t\t\t °èÁÂID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
+	cout << "\t\t\t\t\t\t ê³„ì¢ŒID: "; changeColor(lightGreen); cin >> id; changeColor(darkWhite);
 	cout << endl;
 
 	for (int i = 0; i < accNum; i++)
@@ -344,33 +442,33 @@ void AccountHandler::AccountSuspension(void) {
 		if (accArr[i]->GetAccID() == id)
 		{
 			do{
-				cout << "\t\t\t\t    °èÁÂ È°¼ºÈ­ ¿©ºÎ¸¦ º¯°æÇÏ½Ã°Ú½À´Ï±î?\n\n"<< endl;
-				cout << "\t\t\t\t\tÇöÀç °èÁÂ »óÅÂ : ";
+				cout << "\t\t\t\t    ê³„ì¢Œ í™œì„±í™” ì—¬ë¶€ë¥¼ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?\n\n"<< endl;
+				cout << "\t\t\t\t\tí˜„ì¬ ê³„ì¢Œ ìƒíƒœ : ";
 				if (accArr[i]->GetStatus()) {
-					changeColor(lightBlue); cout << "°èÁÂ È°¼ºÈ­"; changeColor(darkWhite);
+					changeColor(lightBlue); cout << "ê³„ì¢Œ í™œì„±í™”"; changeColor(darkWhite);
 				}
 				else {
-					changeColor(lightRed); cout << "°èÁÂ Á¤Áö"; changeColor(darkWhite);
+					changeColor(lightRed); cout << "ê³„ì¢Œ ì •ì§€"; changeColor(darkWhite);
 				}
-				cout << endl << endl;;
+				cout << endl << endl;
 				printSuspension(0);
 
 
-				cout << "\n\n\t\t\t\t\t\t- ¼±ÅÃ: "; changeColor(lightGreen);
+				cout << "\n\n\t\t\t\t\t\t- ì„ íƒ: "; changeColor(lightGreen);
 				cin >> answer;  changeColor(darkWhite);
 
 				switch(answer){
 				case 1:
 					if(!accArr[i]->GetStatus()) {
-					//TODO ºñ¹ø Æ²¸°°Å È½¼ö Á¶ÀıÇÏ´Â ÇÔ¼ö ±âÈ£ »ó¼ö·Î ¹Ù²ãÁÖ¼¼¿ä
+					//TODO ë¹„ë²ˆ í‹€ë¦°ê±° íšŸìˆ˜ ì¡°ì ˆí•˜ëŠ” í•¨ìˆ˜ ê¸°í˜¸ ìƒìˆ˜ë¡œ ë°”ê¿”ì£¼ì„¸ìš”
 					if (accArr[i]->GetPW() != accArr[i]->InputPw()) {
 						system("cls");
-						changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
+						changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
 
-						cout << " : ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.";
+						cout << " : ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.";
 						cout << "("; changeColor(lightRed);
 						cout << accArr[i]->ChageWorngPW(1); changeColor(darkWhite);
-						cout << "È¸ Æ²¸²)";
+						cout << "íšŒ í‹€ë¦¼)";
 						return;
 					}
 					else accArr[i]->ChageWorngPW(0);
@@ -390,8 +488,8 @@ void AccountHandler::AccountSuspension(void) {
 		}
 	}
 	system("cls");
-	changeColor(lightRed); cout << "°æ°í"; changeColor(darkWhite);
-	cout << " : À¯È¿ÇÏÁö ¾ÊÀº ID ÀÔ´Ï´Ù.";
+	changeColor(lightRed); cout << "ê²½ê³ "; changeColor(darkWhite);
+	cout << " : ìœ íš¨í•˜ì§€ ì•Šì€ ID ì…ë‹ˆë‹¤.";
 }
 
 AccountHandler::AccountHandler() : accNum(0)

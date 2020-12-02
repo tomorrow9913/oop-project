@@ -22,10 +22,7 @@ protected:
 	int wrongCnt;
 	bool activation;
 	char* cusName;
-	char* checkGrade;
-	double interestRate; 
-	double interestRateCheck;
-	const char* typeCheck;	
+	double interestRate;
 	string pass;
 	queue<DealList*> dealList;// 최근 거래 내역
 public:
@@ -37,8 +34,8 @@ public:
 	virtual void NointerestRateDeposit(int money);
 	int getBalance();
 	int Withdraw(int money);
-	int Transfer(int money, Account& accAccount);
-	void ShowAccInfo() const;
+	virtual int Transfer(int money, Account& accAccount);
+	virtual void ShowAccInfo() const;
 	void PrintDealList() const;
 	void AddDealList(int balance, int money, string addressID, string message);
 	bool GetStatus();

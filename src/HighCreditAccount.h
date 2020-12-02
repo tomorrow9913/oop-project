@@ -21,4 +21,6 @@ public:
 	HighCreditAccount(int ID, int money, char* name);
 	void Deposit(int money);
 	int GetGrade();
+	void ShowAccInfo() const;
+	int Transfer(int money, Account& accAccount);
 };

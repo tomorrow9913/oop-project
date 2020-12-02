@@ -16,5 +16,6 @@ public:
 	NormalAccount(const NormalAccount& ref);
 	NormalAccount(int ID, int money, char* name);
 	void Deposit(int money);
+	void ShowAccInfo() const;
 };
 

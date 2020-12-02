@@ -8,7 +8,6 @@ using namespace std;
 void changeColor(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
-
 void printLogo() {
 	cout << endl;
 	changeColor(lightSkyblue);

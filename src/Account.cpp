@@ -13,6 +13,7 @@
 #include <string>
 #include <iomanip>
 #include "Account.h"
+#include "HighCreditAccount.h"
 #include "DealList.h"
 #include "DesignSet.h"
 
@@ -36,6 +37,7 @@ Account::Account(int ID, int money, char* name)
 	this->pass = InputPw();
 	AddDealList(money, money, "계좌개설", "-");
 	cusName = new char[strlen(name) + 1];
+
 	strcpy_s(cusName, (strlen(name) + 1), name);
 
 	system("cls");
@@ -71,6 +73,7 @@ int Account::GetAccID() const { return accID; }
 **/
 void Account::Deposit(int money)
 {
+
 	int interest = (int)(money * interestRate);	// 기본 이자
 	balance += interest;
 	if(interest) AddDealList(balance, interest, "예금이자", "-");
@@ -82,6 +85,7 @@ void Account::Deposit(int money)
 	system("cls");
 	balance += money;
 	if (money) AddDealList(balance, money, "현금 입금", msg);
+	
 }
 /**
 * Function Name: NointerestRateDeposit
@@ -100,7 +104,7 @@ void Account::NointerestRateDeposit(int money){
 * Description: 출금
 *	출금 성공시 잔액 반환
 *	실패시 오류 코드(음수) 반환
-*	ERR_LACK(-1) : 잔액 부족
+*	ERR_LACK(-1) : 잔액 부족 
 * @param: int 출금액
 * @return: int 잔액
 *
@@ -112,14 +116,13 @@ int Account::Withdraw(int money)
 		return ERR_LACK;
 
 	string msg;
-	cout << "출금 메시지 : ";
+	cout << "\t\t\t\t\t출금 메시지 : ";
 	cin >> msg;
 
 	balance -= money;
 	if (money) AddDealList(balance, -money, "현금 출금", msg);
 	return balance;
 }
-
 /**
 * Function Name: ShowAccInfo
 * Description: 계좌 정보 출력.
@@ -133,15 +136,7 @@ void Account::ShowAccInfo() const
 	cout << " " << left << setw(15)
 		<< accID << left << setw(15)
 		<< cusName << left << setw(15) 
-		<< balance << left << setw(15)
-		<< typeCheck << left << setw(15);
-	if (typeCheck == "HighCredit") cout << checkGrade << left << setw(15);
-	else cout << "X" << left << setw(15);
-	cout << interestRateCheck << left << setw(15);
-	if (activation) { changeColor(lightBlue); cout << "계좌 활성화"<< endl; }
-	else { changeColor(lightRed); cout << "계좌 정지"<< endl; }
-
-	changeColor(darkWhite);
+		<< balance << left << setw(15);
 }
 
 /**
@@ -208,7 +203,7 @@ int Account::Transfer(int money, Account& accAccount) {//받는 계좌
 	else fee = 700;
 
 	if (this->balance >= fee + money) {
-		cout << "\t\t\t\t\t메시지 입력 : "; changeColor(lightGreen);
+		cout << "\t\t\t\t\t송금 메시지 : "; changeColor(lightGreen);
 		cin >> msg; changeColor(darkWhite);
 
 		balance -= money;
@@ -218,7 +213,6 @@ int Account::Transfer(int money, Account& accAccount) {//받는 계좌
 		
 		accAccount.NointerestRateDeposit(money);
 		accAccount.AddDealList(accAccount.getBalance(), money, accAccount.cusName, msg);
-
 		return money;
 	}
 	else {
@@ -299,19 +293,19 @@ void Account::SetPW(string PW) {
 **/
 string Account::InputPw() {
 	fflush(stdin);
-	string tmp;
+	string pass;
 
 	cout << "\t\t\t\t\t비밀번호 입력: ____\b\b\b\b";
 	for (int i = 0; i < 4; i++)
 	{
 		changeColor(lightGreen);
-		tmp += _getch();
+		pass += _getch();
 		cout << "*";
 		changeColor(darkWhite);
 	}
 	fflush(stdin);
 	cout << endl;
-	return tmp;
+	return pass;
 }
 
 /**

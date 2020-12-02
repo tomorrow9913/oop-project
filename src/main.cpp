@@ -14,6 +14,7 @@ enum SelectMenu{ MAKE = 1, DEPOSIT, WITHDRAW, TRANSFER,INQUIRE, HISTORY,SUSPENSI
 
 int main(void)
 {
+	string input;
 	AccountHandler manager;
 	int choice;
 
@@ -21,9 +22,11 @@ int main(void)
 	
 	while (1)
 	{
+		cin.clear();
 		manager.ShowMenu();
 		cout << "\t\t\t\t\t\t- ¼±ÅÃ: "; changeColor(lightGreen);
-		cin >> choice;  changeColor(darkWhite);
+		cin >> input;  changeColor(darkWhite);
+		choice = atoi(input.c_str());
 		cout << endl;
 
 		switch (choice)

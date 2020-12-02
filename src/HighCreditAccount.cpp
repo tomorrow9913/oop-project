@@ -4,7 +4,14 @@
  * Description:
  * HighCreditAccount 객체를 구성하기 위한 멤버 함수 정의 파일
  **/
+#include <iostream>
+#include <iomanip>
+#include <string>
 #include "HighCreditAccount.h"
+#include "Account.h"
+#include "DesignSet.h"
+
+using namespace std;
 
 double HighCreditAccount::interestRate[4] = { 0.07, 0.05, 0.03, 0 };
 
@@ -14,8 +21,6 @@ HighCreditAccount::HighCreditAccount() :Account(0, 0, NULL) {
 	this->cusName = 0;
 	this->grade = 0;
 	this->addInterestRate = 0;
-	this->typeCheck = "HighCredit";
-	this->interestRateCheck = addInterestRate;
 };
 
 HighCreditAccount::HighCreditAccount(int ID, int money, char* name) :Account(ID, money, name) {
@@ -23,33 +28,6 @@ HighCreditAccount::HighCreditAccount(int ID, int money, char* name) :Account(ID,
 	else if (this->balance >= SET_B) { this->grade = 2; this->addInterestRate = interestRate[this->grade - 1]; }
 	else if (this->balance >= SET_C) { this->grade = 3; this->addInterestRate = interestRate[this->grade - 1]; }
 	else { this->grade = 4; this->addInterestRate = interestRate[this->grade - 1]; }
-	if (this->balance >= SET_A) {
-		this->grade = 1;
-		this->addInterestRate = interestRate[this->grade - 1];
-
-		checkGrade = new char[strlen("A등급") + 1];
-		strcpy_s(checkGrade, strlen("A등급") + 1,"A등급");
-	}
-	else if (this->balance >= SET_B) {
-		this->grade = 2;
-		this->addInterestRate = interestRate[this->grade - 1];
-		checkGrade = new char[strlen("B등급") + 1];
-		strcpy_s(checkGrade, strlen("B등급") + 1, "B등급");
-	}
-	else if (this->balance >= SET_C) {
-		this->grade = 3;
-		this->addInterestRate = interestRate[this->grade - 1];
-		checkGrade = new char[strlen("C등급") + 1];
-		strcpy_s(checkGrade, strlen("C등급") + 1, "C등급");
-	}
-	else {
-		this->grade = 4;
-		this->addInterestRate = interestRate[this->grade - 1];
-		checkGrade = new char[strlen("등급없음") + 1];
-		strcpy_s(checkGrade, strlen("등급없음") + 1, "등급없음");
-	}
-	this->typeCheck = "HighCredit";
-	this->interestRateCheck = addInterestRate;
 }
 
 /**
@@ -63,10 +41,21 @@ HighCreditAccount::HighCreditAccount(int ID, int money, char* name) :Account(ID,
 * - set Jeong MinGyu
 **/
 void HighCreditAccount::SetGrade() {
-	if (this->balance >= SET_A) { this->grade = 1; this->addInterestRate = interestRate[this->grade - 1]; }
-	else if (this->balance >= SET_B) { this->grade = 2; this->addInterestRate = interestRate[this->grade - 1]; }
-	else if (this->balance >= SET_C) { this->grade = 3; this->addInterestRate = interestRate[this->grade - 1]; }
-	else { this->grade = 4; this->addInterestRate = interestRate[this->grade - 1]; }
+	if (this->balance >= SET_A) {
+		this->grade = GRADE_A;
+		this->addInterestRate = interestRate[this->grade - 1];
+	}
+	else if (this->balance >= SET_B) {
+		this->grade = GRADE_B;
+		this->addInterestRate = interestRate[this->grade - 1];
+	}
+	else if (this->balance >= SET_C) {
+		this->grade = GRADE_C;
+		this->addInterestRate = interestRate[this->grade - 1];
+	}
+	else {
+		this->grade = GRADE_D; this->addInterestRate = interestRate[this->grade - 1];
+	}
 }
 
 int HighCreditAccount::GetGrade() {
@@ -88,4 +77,54 @@ void HighCreditAccount::Deposit(int money) {
 	int interest = (int)(money * addInterestRate);
 	balance += interest; //등급별 이자
 	if (interest) AddDealList(balance, interest, "우대이자", "-");
+}
+
+
+/**
+* Function Name: ShowAccInfo
+* Description: info 출력
+* @param: void
+* @return: void
+*
+* Author: -
+**/
+void HighCreditAccount::ShowAccInfo() const {
+	Account::ShowAccInfo();
+	cout << "HighCredit" << left << setw(15);
+	string gradeString;
+
+	switch (grade)
+	{
+	case GRADE_A:
+		gradeString = "A등급"; break;
+	case GRADE_B: 
+		gradeString = "B등급"; break;
+	case GRADE_C:
+		gradeString = "C등급"; break;
+	case GRADE_D:
+		gradeString = "등급없음"; break;
+	default:
+		break;
+	}
+
+	cout << gradeString << left << setw(15);
+	cout << (Account::interestRate + addInterestRate) << left << setw(15);
+	if (activation) { changeColor(lightBlue); cout << "계좌 활성화" << endl; }
+	else { changeColor(lightRed); cout << "계좌 정지" << endl; }
+
+	changeColor(darkWhite);
+}
+
+/**
+* Function Name: Transfer
+* Description: 송금 후 등급 설정
+* @param: void
+* @return: int
+*
+* Author: -
+**/
+int HighCreditAccount::Transfer(int money, Account& accAccount) {
+	Account::Transfer(money, accAccount);
+	this->SetGrade();
+	return money;
 }
