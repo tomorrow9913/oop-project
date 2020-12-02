@@ -32,13 +32,17 @@ void printLogo() {
 
 void printContent(string content) {
 	cout << endl;
-	changeColor(lightBlue);
-	cout << "+====================================================================================================+" << endl;
-	changeColor(skyblue); cout << "||\t\t\t\t\t\t\t\t\t\t\t\t    ||" << endl;
-	changeColor(lightBlue); cout << "||";
-	changeColor(lightSkyblue); cout << "\t\t\t\t\t\t>>" << content << "<<"; changeColor(lightBlue); cout << "\t\t\t\t\t    ||" << endl;
-	changeColor(skyblue); cout << "||\t\t\t\t\t\t\t\t\t\t\t\t    ||" << endl;
-	cout << "+====================================================================================================+" << endl << endl;
+	changeColor(blue);cout << "+=======";changeColor(lightBlue); cout << "================"; 
+	changeColor(skyblue); cout << "======================================================";changeColor(lightBlue); cout << "================";
+	changeColor(blue); cout << "=======+"<<endl;
+	changeColor(blue); cout << "||\t\t\t\t\t\t\t\t\t\t\t\t    ||" << endl;
+	changeColor(blue); cout << "||";
+	changeColor(white); cout << "\t\t\t\t\t\t>>" << content << "<<"; 
+	changeColor(blue); cout << "\t\t\t\t\t    ||" << endl;
+	changeColor(blue); cout << "||\t\t\t\t\t\t\t\t\t\t\t\t    ||" << endl;
+	changeColor(blue); cout << "+======="; changeColor(lightBlue); cout << "================";
+	changeColor(skyblue); cout << "======================================================"; changeColor(lightBlue); cout << "================";
+	changeColor(blue); cout << "=======+" << endl<<endl;
 	changeColor(darkWhite);
 }
 
