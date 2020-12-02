@@ -71,12 +71,11 @@ int HighCreditAccount::GetGrade() {
 * Author: 남유정, 박주용, 이승민, 정민규
 **/
 void HighCreditAccount::Deposit(int money) {
-	//등급 확인
-	SetGrade();
 	Account::Deposit(money); //기본 이자
 	int interest = (int)(money * addInterestRate);
 	balance += interest; //등급별 이자
 	if (interest) AddDealList(balance, interest, "우대이자", "-");
+	SetGrade();
 }
 
 
@@ -121,10 +120,37 @@ void HighCreditAccount::ShowAccInfo() const {
 * @param: void
 * @return: int
 *
-* Author: -
+* Author: Jeong MinGyu
 **/
 int HighCreditAccount::Transfer(int money, Account& accAccount) {
 	Account::Transfer(money, accAccount);
 	this->SetGrade();
 	return money;
+}
+
+/**
+* Function Name: Withdraw
+* Description: 출금 후 등급 설정
+* @param: int money
+* @return: int
+*
+* Author: Jeong MinGyu
+**/
+int HighCreditAccount::Withdraw(int money) {
+	int result = Account::Withdraw(money);
+	SetGrade();
+	return result;
+}
+
+/**
+* Function Name: NointerestRateDeposit
+* Description: 이자 없는 입금 후 등급 설정
+* @param: int money
+* @return: void
+*
+* Author: Jeong MinGyu
+**/
+void HighCreditAccount::NointerestRateDeposit(int money) {
+	Account::NointerestRateDeposit(money);
+	this->SetGrade();
 }

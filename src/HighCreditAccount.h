@@ -23,4 +23,6 @@ public:
 	int GetGrade();
 	void ShowAccInfo() const;
 	int Transfer(int money, Account& accAccount);
+	int Withdraw(int money);
+	void NointerestRateDeposit(int money);
 };

@@ -33,7 +33,7 @@ public:
 	virtual void Deposit(int money); 
 	virtual void NointerestRateDeposit(int money);
 	int getBalance();
-	int Withdraw(int money);
+	virtual int Withdraw(int money);
 	virtual int Transfer(int money, Account& accAccount);
 	virtual void ShowAccInfo() const;
 	void PrintDealList() const;

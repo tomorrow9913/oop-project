@@ -21,7 +21,7 @@ int main(void)
 	system("mode con cols=105 lines=50");
 	
 	while (1)
-	{
+	{          
 		cin.clear();
 		manager.ShowMenu();
 		cout << "\t\t\t\t\t\t- ¼±ÅÃ: "; changeColor(lightGreen);
