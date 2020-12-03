@@ -63,21 +63,15 @@ void AccountHandler::MakeAccount(void)
 		if (type <= 0 || type > 2) continue;
 		break;
 	}
+rewrite:
 	printContent(content);
 	printAccontMenu(type);
-rewrite:
 	changeColor(darkWhite);
 	cout << "\n";
 	cout << "\t\t\t\t\t계좌 유형 선택 : "; changeColor(lightGreen); cout << type << endl; changeColor(darkWhite);
 
 	cout << "\t\t\t\t\t계좌ID: "; changeColor(lightGreen); cin >> input;  changeColor(darkWhite);
 	id = atoi(input.c_str());
-	if (id <= 0) goto rewrite;
-	cout << "\t\t\t\t\t이  름: "; changeColor(lightGreen); cin >> name; changeColor(darkWhite);
-	cout << "\t\t\t\t\t입금액: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
-	balance = atoi(input.c_str());
-	if(balance < 0) goto rewrite;
-	cout << endl;
 	
 	if (id < 0) {
 		system("cls"); changeColor(lightRed);
@@ -85,6 +79,16 @@ rewrite:
 		cout << " : 계좌 번호를 음수로 사용할 수 없습니다.";
 		goto rewrite;
 	}
+	cout << "\t\t\t\t\t이  름: "; changeColor(lightGreen); cin >> name; changeColor(darkWhite);
+	cout << "\t\t\t\t\t입금액: "; changeColor(lightGreen); cin >> input; changeColor(darkWhite);
+	balance = atoi(input.c_str()); 
+	if (balance < 0) {
+		system("cls"); changeColor(lightRed);
+		cout << "경고"; changeColor(darkWhite);
+		cout << " : 초기 잔액을 음수로 사용할 수 없습니다.";
+		goto rewrite;
+	}
+	cout << endl;
 
 	for (int i = 0; i < accNum; i++)
 	{
